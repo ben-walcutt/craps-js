@@ -1,0 +1,180 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <div class="flex-row center">
+            <div><h1>Crapulations</h1></div>
+        </div>
+        <div class="flex-row">
+            <div class="flex-col" id="main-bets" style="width: 66%">
+                <div class="flex-row around">
+                    <div id="dont_come" class="light-border p-1 m-1 number-width">
+                        <div class="text-center"><h1>Don't Come</h1></div>
+                        <input type="number" step="5" id="dont_come" class="bet-width mt-1" />
+                    </div>
+                    <div id="place" class="light-border p-1 m-1 number-width">
+                        <div class="text-center"><h1>4</h1></div>
+                        <div>
+                            <input type="number" step="5" id="place_four" placeholder="Place 4" class="bet-width mt-1" />
+                            <input type="number" step="5" id="buy_four" placeholder="Buy 4" class="bet-width mt-1"/>
+                            <input type="number" step="5" id="lay_four" placeholder="Lay 4" class="bet-width mt-1" />
+                        </div>
+                    </div>
+                    <div id="place" class="light-border p-1 m-1 number-width">
+                        <div class="text-center"><h1>5</h1></div>
+                        <div>
+                            <input type="number" step="5" id="place_five" placeholder="Place 5" class="bet-width mt-1" />
+                            <input type="number" step="5" id="buy_five" placeholder="Buy 5" class="bet-width mt-1" />
+                            <input type="number" step="5" id="lay_five" placeholder="Lay 5" class="bet-width mt-1" />
+                        </div>
+                    </div>
+                    <div id="place" class="light-border p-1 m-1 number-width">
+                        <div class="text-center"><h1>6</h1></div>
+                        <div>
+                            <input type="number" step="6" id="place_six" placeholder="Place 6" class="bet-width mt-1" />
+                            <input type="number" step="6" id="buy_six" placeholder="Buy 6" class="bet-width mt-1" />
+                            <input type="number" step="6" id="lay_six" placeholder="Lay 6" class="bet-width mt-1" />
+                        </div>
+                    </div>
+                    <div id="place" class="light-border p-1 m-1 number-width">
+                        <div class="text-center"><h1>8</h1></div>
+                        <div>
+                            <input type="number" step="6" id="place_eight" placeholder="Place 8" class="bet-width mt-1" />
+                            <input type="number" step="6" id="buy_eight" placeholder="Buy 8" class="bet-width mt-1" />
+                            <input type="number" step="6" id="lay_eight" placeholder="Lay 8" class="bet-width mt-1" />
+                        </div>
+                    </div>
+                    <div id="place" class="light-border p-1 m-1 number-width">
+                        <div class="text-center"><h1>9</h1></div>
+                        <div>
+                            <input type="number" step="5" id="place_nine" placeholder="Place 9" class="bet-width mt-1" />
+                            <input type="number" step="5" id="buy_nine" placeholder="Buy 9" class="bet-width mt-1" />
+                            <input type="number" step="5" id="lay_nine" placeholder="Lay 9" class="bet-width mt-1" />
+                        </div>
+                    </div>
+                    <div id="place" class="light-border p-1 m-1 number-width">
+                        <div class="text-center"><h1>10</h1></div>
+                        <div>
+                            <input type="number" step="5" id="place_ten" placeholder="Place 10" class="bet-width mt-1" />
+                            <input type="number" step="5" id="buy_ten" placeholder="Buy 10" class="bet-width mt-1" />
+                            <input type="number" step="5" id="lay_ten" placeholder="Lay 10" class="bet-width mt-1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-col align-center light-border p-1 m-1">
+                    <div class="flex-row">
+                        <h1>Come</h1>
+                    </div>
+                    <input type="number" step="5" id="come_bet" placeholder="Come" class="bet-width mt-1" />
+                </div>
+                <div class="flex-col align-center light-border p-1 m-1">
+                    <div class="flex-row" style="align-items: baseline">
+                        <div class="flex-col align-center">
+                            <div class="circle">
+                                <div class="field-number">2</div>
+                            </div>
+                            <div style="font-weight: bold">Pays Double</div>
+                        </div>
+                        <div class="field-number p-1">3</div>
+                        <div class="dot"></div>
+                        <div class="field-number p-1">4</div>
+                        <div class="dot"></div>
+                        <div class="field-number p-1">9</div>
+                        <div class="dot"></div>
+                        <div class="field-number p-1">10</div>
+                        <div class="dot"></div>
+                        <div class="field-number p-1">11</div>
+                        <div class="flex-col align-center">
+                            <div class="circle">
+                                <div class="field-number">12</div>
+                            </div>
+                            <div style="font-weight: bold">Pays Triple</div>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="number" step="5" id="field" placeholder="Field" class="bet-width mt-1" />
+                    </div>
+                </div>
+                <div class="flex-row center">
+                    <div class="flex-row evenly full-width">
+                        <div id="pass" class="light-border p-1 m-1">
+                            <div><h2>Pass Line</h2></div>
+                            <div><h3>Pass Bet</h3></div>
+                            <div>
+                                <input type="number" step="5" id="pass_bet" onchange="passBetChange()"/>
+                            </div>
+                            <div><h3>Pass Odds</h3></div>
+                            <div>
+                                <input type="number" step="5" id="pass_odds" disabled="true"/>
+                            </div>
+                        </div>
+                        <div id="dont" class="light-border p-1 m-1">
+                            <div><h2>Don't Pass</h2></div>
+                            <div><h3>Don't Bet</h3></div>
+                            <div>
+                                <input type="number" step="5" id="dont_bet" onchange="dontBetChange()"/>
+                            </div>
+                            <div><h3>Don't Odds</h3></div>
+                            <div>
+                                <input type="number" step="5" id="dont_odds" disabled="true"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-col" id="prop-bets" style="width: 33%">
+                <div class="flex-col light-border p-1 m-1">
+                    <div class="flex-row evenly">
+                        <div class="flex-col">
+                            <div class="text-center">
+                                <div class="flex-row">
+                                    <img src="images/three.png" alt="3" width="50" height="50" />
+                                    <img src="images/three.png" alt="3" width="50" height="50" />
+                                </div>
+                                <h5>9 to 1</h5>
+                                <input type="number" step="1" id="hard_six" placeholder="3 3" class="bet-width mt-1" />
+                            </div>
+                        </div>
+                        <div class="flex-col">
+                            <div class="text-center">
+                                <div class="flex-row">
+                                    <img src="images/four.png" alt="4" width="50" height="50" />
+                                    <img src="images/four.png" alt="4" width="50" height="50" />
+                                </div>
+                                <h5>9 to 1</h5>
+                                <input type="number" step="1" id="hard_eight" placeholder="4 4" class="bet-width mt-1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-row evenly">
+                        <div class="flex-col">
+                            <div class="text-center">
+                                <div class="flex-row">
+                                    <img src="images/two.png" alt="2" width="50" height="50" />
+                                    <img src="images/two.png" alt="2" width="50" height="50" />
+                                </div>
+                                <h5>7 to 1</h5>
+                                <input type="number" step="1" id="hard_four" placeholder="2 2" class="bet-width mt-1" />
+                            </div>
+                        </div>
+                        <div class="flex-col">
+                            <div class="text-center">
+                                <div class="flex-row">
+                                    <img src="images/five.png" alt="5" width="50" height="50" />
+                                    <img src="images/five.png" alt="5" width="50" height="50" />
+                                </div>
+                                <h5>7 to 1</h5>
+                                <input type="number" step="1" id="hard_ten" placeholder="5 5" class="bet-width mt-1" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-row evenly light-border p-1 m-1">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
