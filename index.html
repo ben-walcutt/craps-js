@@ -1,180 +1,383 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="main.js"></script>
-    </head>
-    <body>
-        <div class="flex-row center">
-            <div><h1>Crapulations</h1></div>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div class="flex-row center">
+        <!-- <img src="images/table.png" /> -->
+        <div>
+            <h1>Crapulations</h1>
         </div>
-        <div class="flex-row">
-            <div class="flex-col" id="main-bets" style="width: 66%">
-                <div class="flex-row around">
-                    <div id="dont_come" class="light-border p-1 m-1 number-width">
-                        <div class="text-center"><h1>Don't Come</h1></div>
-                        <input type="number" step="5" id="dont_come" class="bet-width mt-1" />
+    </div>
+    <div class="flex-row">
+        <div class="flex-col" id="main-bets" style="width: 66%">
+            <div class="flex-row around">
+                <div id="dont_come" class="light-border p-1 m-1 number-width" style="position: relative">
+                    <img src="images/off.png" width="25" height="25" style="position: absolute" />
+                    <div class="text-center">
+                        <h1>Don't Come</h1>
                     </div>
-                    <div id="place" class="light-border p-1 m-1 number-width">
-                        <div class="text-center"><h1>4</h1></div>
-                        <div>
-                            <input type="number" step="5" id="place_four" placeholder="Place 4" class="bet-width mt-1" />
-                            <input type="number" step="5" id="buy_four" placeholder="Buy 4" class="bet-width mt-1"/>
-                            <input type="number" step="5" id="lay_four" placeholder="Lay 4" class="bet-width mt-1" />
-                        </div>
-                    </div>
-                    <div id="place" class="light-border p-1 m-1 number-width">
-                        <div class="text-center"><h1>5</h1></div>
-                        <div>
-                            <input type="number" step="5" id="place_five" placeholder="Place 5" class="bet-width mt-1" />
-                            <input type="number" step="5" id="buy_five" placeholder="Buy 5" class="bet-width mt-1" />
-                            <input type="number" step="5" id="lay_five" placeholder="Lay 5" class="bet-width mt-1" />
-                        </div>
-                    </div>
-                    <div id="place" class="light-border p-1 m-1 number-width">
-                        <div class="text-center"><h1>6</h1></div>
-                        <div>
-                            <input type="number" step="6" id="place_six" placeholder="Place 6" class="bet-width mt-1" />
-                            <input type="number" step="6" id="buy_six" placeholder="Buy 6" class="bet-width mt-1" />
-                            <input type="number" step="6" id="lay_six" placeholder="Lay 6" class="bet-width mt-1" />
-                        </div>
-                    </div>
-                    <div id="place" class="light-border p-1 m-1 number-width">
-                        <div class="text-center"><h1>8</h1></div>
-                        <div>
-                            <input type="number" step="6" id="place_eight" placeholder="Place 8" class="bet-width mt-1" />
-                            <input type="number" step="6" id="buy_eight" placeholder="Buy 8" class="bet-width mt-1" />
-                            <input type="number" step="6" id="lay_eight" placeholder="Lay 8" class="bet-width mt-1" />
-                        </div>
-                    </div>
-                    <div id="place" class="light-border p-1 m-1 number-width">
-                        <div class="text-center"><h1>9</h1></div>
-                        <div>
-                            <input type="number" step="5" id="place_nine" placeholder="Place 9" class="bet-width mt-1" />
-                            <input type="number" step="5" id="buy_nine" placeholder="Buy 9" class="bet-width mt-1" />
-                            <input type="number" step="5" id="lay_nine" placeholder="Lay 9" class="bet-width mt-1" />
-                        </div>
-                    </div>
-                    <div id="place" class="light-border p-1 m-1 number-width">
-                        <div class="text-center"><h1>10</h1></div>
-                        <div>
-                            <input type="number" step="5" id="place_ten" placeholder="Place 10" class="bet-width mt-1" />
-                            <input type="number" step="5" id="buy_ten" placeholder="Buy 10" class="bet-width mt-1" />
-                            <input type="number" step="5" id="lay_ten" placeholder="Lay 10" class="bet-width mt-1" />
-                        </div>
-                    </div>
+                    <input type="number" step="5" min="0" id="dont_come" class="bet-width mt-1"
+                        oninput="checkInput(this)" />
                 </div>
-                <div class="flex-col align-center light-border p-1 m-1">
-                    <div class="flex-row">
-                        <h1>Come</h1>
-                    </div>
-                    <input type="number" step="5" id="come_bet" placeholder="Come" class="bet-width mt-1" />
-                </div>
-                <div class="flex-col align-center light-border p-1 m-1">
-                    <div class="flex-row" style="align-items: baseline">
-                        <div class="flex-col align-center">
-                            <div class="circle">
-                                <div class="field-number">2</div>
-                            </div>
-                            <div style="font-weight: bold">Pays Double</div>
-                        </div>
-                        <div class="field-number p-1">3</div>
-                        <div class="dot"></div>
-                        <div class="field-number p-1">4</div>
-                        <div class="dot"></div>
-                        <div class="field-number p-1">9</div>
-                        <div class="dot"></div>
-                        <div class="field-number p-1">10</div>
-                        <div class="dot"></div>
-                        <div class="field-number p-1">11</div>
-                        <div class="flex-col align-center">
-                            <div class="circle">
-                                <div class="field-number">12</div>
-                            </div>
-                            <div style="font-weight: bold">Pays Triple</div>
-                        </div>
+                <div id="place" class="light-border p-1 m-1 number-width">
+                    <div class="text-center">
+                        <h1>4</h1>
                     </div>
                     <div>
-                        <input type="number" step="5" id="field" placeholder="Field" class="bet-width mt-1" />
+                        <div id="come_four"></div>
+                        <input type="number" step="5" min="0" id="come_four_odds" placeholder="Odds"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="place_four" placeholder="Place 4"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="buy_four" placeholder="Buy 4" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="lay_four" placeholder="Lay 4" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
                     </div>
                 </div>
-                <div class="flex-row center">
-                    <div class="flex-row evenly full-width">
-                        <div id="pass" class="light-border p-1 m-1">
-                            <div><h2>Pass Line</h2></div>
-                            <div><h3>Pass Bet</h3></div>
-                            <div>
-                                <input type="number" step="5" id="pass_bet" onchange="passBetChange()"/>
-                            </div>
-                            <div><h3>Pass Odds</h3></div>
-                            <div>
-                                <input type="number" step="5" id="pass_odds" disabled="true"/>
-                            </div>
-                        </div>
-                        <div id="dont" class="light-border p-1 m-1">
-                            <div><h2>Don't Pass</h2></div>
-                            <div><h3>Don't Bet</h3></div>
-                            <div>
-                                <input type="number" step="5" id="dont_bet" onchange="dontBetChange()"/>
-                            </div>
-                            <div><h3>Don't Odds</h3></div>
-                            <div>
-                                <input type="number" step="5" id="dont_odds" disabled="true"/>
-                            </div>
-                        </div>
+                <div id="place" class="light-border p-1 m-1 number-width">
+                    <div class="text-center">
+                        <h1>5</h1>
+                    </div>
+                    <div>
+                        <div id="come_five"></div>
+                        <input type="number" step="5" min="0" id="come_five_odds" placeholder="Odds"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="place_five" placeholder="Place 5"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="buy_five" placeholder="Buy 5" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="lay_five" placeholder="Lay 5" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                </div>
+                <div id="place" class="light-border p-1 m-1 number-width">
+                    <div class="text-center">
+                        <h1>6</h1>
+                    </div>
+                    <div>
+                        <div id="come_six"></div>
+                        <input type="number" step="5" min="0" id="come_six_odds" placeholder="Odds"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="6" min="0" id="place_six" placeholder="Place 6"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="6" min="0" id="buy_six" placeholder="Buy 6" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="6" min="0" id="lay_six" placeholder="Lay 6" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                </div>
+                <div id="place" class="light-border p-1 m-1 number-width">
+                    <div class="text-center">
+                        <h1>8</h1>
+                    </div>
+                    <div>
+                        <div id="come_eight"></div>
+                        <input type="number" step="5" min="0" id="come_eight_odds" placeholder="Odds"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="6" min="0" id="place_eight" placeholder="Place 8"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="6" min="0" id="buy_eight" placeholder="Buy 8" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="6" min="0" id="lay_eight" placeholder="Lay 8" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                </div>
+                <div id="place" class="light-border p-1 m-1 number-width">
+                    <div class="text-center">
+                        <h1>9</h1>
+                    </div>
+                    <div>
+                        <div id="come_nine"></div>
+                        <input type="number" step="5" min="0" id="come_nine_odds" placeholder="Odds"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="place_nine" placeholder="Place 9"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="buy_nine" placeholder="Buy 9" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="lay_nine" placeholder="Lay 9" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                </div>
+                <div id="place" class="light-border p-1 m-1 number-width">
+                    <div class="text-center">
+                        <h1>10</h1>
+                    </div>
+                    <div>
+                        <div id="come_ten"></div>
+                        <input type="number" step="5" min="0" id="come_ten_odds" placeholder="Odds"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="place_ten" placeholder="Place 10"
+                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="buy_ten" placeholder="Buy 10" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <input type="number" step="5" min="0" id="lay_ten" placeholder="Lay 10" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
                     </div>
                 </div>
             </div>
-            <div class="flex-col" id="prop-bets" style="width: 33%">
-                <div class="flex-col light-border p-1 m-1">
-                    <div class="flex-row evenly">
-                        <div class="flex-col">
-                            <div class="text-center">
-                                <div class="flex-row">
-                                    <img src="images/three.png" alt="3" width="50" height="50" />
-                                    <img src="images/three.png" alt="3" width="50" height="50" />
-                                </div>
-                                <h5>9 to 1</h5>
-                                <input type="number" step="1" id="hard_six" placeholder="3 3" class="bet-width mt-1" />
-                            </div>
+            <div class="flex-col align-center light-border p-1 m-1">
+                <div class="flex-row">
+                    <h1>Come</h1>
+                </div>
+                <input type="number" step="5" min="0" id="come_bet" placeholder="Come" class="bet-width mt-1"
+                    onchange="handleBetChange()" oninput="checkInput(this)" />
+            </div>
+            <div class="flex-col align-center light-border p-1 m-1">
+                <div class="flex-row" style="align-items: baseline">
+                    <div class="flex-col align-center">
+                        <div class="circle">
+                            <div class="field-number">2</div>
                         </div>
-                        <div class="flex-col">
-                            <div class="text-center">
-                                <div class="flex-row">
-                                    <img src="images/four.png" alt="4" width="50" height="50" />
-                                    <img src="images/four.png" alt="4" width="50" height="50" />
-                                </div>
-                                <h5>9 to 1</h5>
-                                <input type="number" step="1" id="hard_eight" placeholder="4 4" class="bet-width mt-1" />
-                            </div>
-                        </div>
+                        <div style="font-weight: bold">Pays Double</div>
                     </div>
-                    <div class="flex-row evenly">
-                        <div class="flex-col">
-                            <div class="text-center">
-                                <div class="flex-row">
-                                    <img src="images/two.png" alt="2" width="50" height="50" />
-                                    <img src="images/two.png" alt="2" width="50" height="50" />
-                                </div>
-                                <h5>7 to 1</h5>
-                                <input type="number" step="1" id="hard_four" placeholder="2 2" class="bet-width mt-1" />
-                            </div>
+                    <div class="field-number p-1">3</div>
+                    <div class="dot"></div>
+                    <div class="field-number p-1">4</div>
+                    <div class="dot"></div>
+                    <div class="field-number p-1">9</div>
+                    <div class="dot"></div>
+                    <div class="field-number p-1">10</div>
+                    <div class="dot"></div>
+                    <div class="field-number p-1">11</div>
+                    <div class="flex-col align-center">
+                        <div class="circle">
+                            <div class="field-number">12</div>
                         </div>
-                        <div class="flex-col">
-                            <div class="text-center">
-                                <div class="flex-row">
-                                    <img src="images/five.png" alt="5" width="50" height="50" />
-                                    <img src="images/five.png" alt="5" width="50" height="50" />
-                                </div>
-                                <h5>7 to 1</h5>
-                                <input type="number" step="1" id="hard_ten" placeholder="5 5" class="bet-width mt-1" />
-                            </div>
-                        </div>
+                        <div style="font-weight: bold">Pays Triple</div>
                     </div>
                 </div>
-                <div class="flex-row evenly light-border p-1 m-1">
+                <div>
+                    <input type="number" step="5" min="0" id="field" placeholder="Field" class="bet-width mt-1"
+                        onchange="handleBetChange()" oninput="checkInput(this)" />
+                </div>
+            </div>
+            <div class="flex-row center">
+                <div class="flex-row evenly full-width">
+                    <div id="pass" class="light-border p-1 m-1">
+                        <div>
+                            <h2>Pass Line</h2>
+                        </div>
+                        <div>
+                            <h3>Pass Bet</h3>
+                        </div>
+                        <div>
+                            <input type="number" step="5" min="0" id="pass_bet" onchange="passBetChange()"
+                                oninput="checkInput(this)" />
+                        </div>
+                        <div>
+                            <h3>Pass Odds</h3>
+                        </div>
+                        <div>
+                            <input type="number" step="5" min="0" id="pass_odds" disabled="true"
+                                onchange="handleBetChange()" oninput="checkInput(this)" />
+                        </div>
+                    </div>
+                    <div id="dont" class="light-border p-1 m-1">
+                        <div>
+                            <h2>Don't Pass</h2>
+                        </div>
+                        <div>
+                            <h3>Don't Bet</h3>
+                        </div>
+                        <div>
+                            <input type="number" step="5" min="0" id="dont_bet" onchange="dontBetChange()"
+                                oninput="checkInput(this)" />
+                        </div>
+                        <div>
+                            <h3>Don't Odds</h3>
+                        </div>
+                        <div>
+                            <input type="number" step="5" min="0" id="dont_odds" disabled="true"
+                                onchange="handleBetChange()" oninput="checkInput(this)" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
+        <div class="flex-col" id="prop-bets" style="width: 33%">
+            <div class="flex-col light-border p-1 m-1">
+                <div class="flex-row evenly">
+                    <div class="flex-col">
+                        <div class="text-center">
+                            <div class="flex-row">
+                                <img src="images/three.png" alt="3" width="50" height="50" />
+                                <img src="images/three.png" alt="3" width="50" height="50" />
+                            </div>
+                            <div class="payout">9 to 1</div>
+                            <input type="number" step="1" min="0" id="hard_six" placeholder="3 3" class="bet-width mt-1"
+                                onchange="handleBetChange()" oninput="checkInput(this)" />
+                        </div>
+                    </div>
+                    <div class="flex-col">
+                        <div class="text-center">
+                            <div class="flex-row">
+                                <img src="images/four.png" alt="4" width="50" height="50" />
+                                <img src="images/four.png" alt="4" width="50" height="50" />
+                            </div>
+                            <div class="payout">9 to 1</div>
+                            <input type="number" step="1" min="0" id="hard_eight" placeholder="4 4"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-row evenly">
+                    <div class="flex-col">
+                        <div class="text-center">
+                            <div class="flex-row">
+                                <img src="images/two.png" alt="2" width="50" height="50" />
+                                <img src="images/two.png" alt="2" width="50" height="50" />
+                            </div>
+                            <div class="payout">7 to 1</div>
+                            <input type="number" step="1" min="0" id="hard_four" placeholder="2 2"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
+                        </div>
+                    </div>
+                    <div class="flex-col">
+                        <div class="text-center">
+                            <div class="flex-row">
+                                <img src="images/five.png" alt="5" width="50" height="50" />
+                                <img src="images/five.png" alt="5" width="50" height="50" />
+                            </div>
+                            <div class="payout">7 to 1</div>
+                            <input type="number" step="1" min="0" id="hard_ten" placeholder="5 5" class="bet-width mt-1"
+                                onchange="handleBetChange()" oninput="checkInput(this)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-col m-1">
+                <div class="flex-col align-center light-border p-1">
+                    <div>Any Seven</div>
+                    <div class="payout"> 4 to 1</div>
+                    <input type="number" step="1" min="0" id="any_seven" placeholder="Big Red" class="bet-width mt-1"
+                        onchange="handleBetChange()" oninput="checkInput(this)" />
+                </div>
+                <div class="flex-row between">
+                    <div class="flex-col light-border p-1">
+                        <span>Horn High</span>
+                        <div class="flex-row center">
+                            <img src="images/one.png" alt="1" width="25" height="25" />
+                            <img src="images/one.png" alt="1" width="25" height="25" />
+                        </div>
+                        <input type="number" step="5" min="0" id="horn_high_two" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                    <div class="flex-col light-border p-1">
+                        <span>Horn High</span>
+                        <div class="flex-row center">
+                            <img src="images/one.png" alt="1" width="25" height="25" />
+                            <img src="images/two.png" alt="2" width="25" height="25" />
+                        </div>
+                        <input type="number" step="5" min="0" id="horn_high_three" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                    <div class="flex-col light-border p-1">
+                        <span>Horn High</span>
+                        <div class="flex-row center">
+                            <img src="images/five.png" alt="5" width="25" height="25" />
+                            <img src="images/six.png" alt="6" width="25" height="25" />
+                        </div>
+                        <input type="number" step="5" min="0" id="horn_high_eleven" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                    <div class="flex-col light-border p-1">
+                        <span>Horn High</span>
+                        <div class="flex-row center">
+                            <img src="images/six.png" alt="6" width="25" height="25" />
+                            <img src="images/six.png" alt="6" width="25" height="25" />
+                        </div>
+                        <input type="number" step="5" min="0" id="horn_high_twelve" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                </div>
+                <div class="flex-row evenly light-border p-1">
+                    <div class="flex-col align-center light-border p-1">
+                        <div class="flex-row center">
+                            <img src="images/one.png" alt="1" width="25" height="25" />
+                            <img src="images/one.png" alt="1" width="25" height="25" />
+                        </div>
+                        <div class="payout">30 to 1</div>
+                        <input type="number" step="1" min="0" id="horn_two" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                    <div class="flex-col align-center light-border p-1">
+                        <div class="flex-row center">
+                            <img src="images/one.png" alt="1" width="25" height="25" />
+                            <img src="images/two.png" alt="2" width="25" height="25" />
+                        </div>
+                        <div class="payout">15 to 1</div>
+                        <input type="number" step="1" min="0" id="horn_three" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                </div>
+                <div class="flex-row evenly light-border p-1">
+                    <div class="flex-col align-center light-border p-1">
+                        <div class="flex-row center">
+                            <img src="images/five.png" alt="5" width="25" height="25" />
+                            <img src="images/six.png" alt="6" width="25" height="25" />
+                        </div>
+                        <div class="payout">15 to 1</div>
+                        <input type="number" step="1" min="0" id="horn_eleven" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                    <div class="flex-col align-center light-border p-1">
+                        <div class="flex-row center">
+                            <img src="images/six.png" alt="6" width="25" height="25" />
+                            <img src="images/six.png" alt="6" width="25" height="25" />
+                        </div>
+                        <div class="payout">30 to 1</div>
+                        <input type="number" step="1" min="0" id="horn_twelve" class="bet-width mt-1"
+                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                    </div>
+                </div>
+                <div class="flex-col align-center light-border p-1">
+                    <div>Any Craps</div>
+                    <div class="payout"> 7 to 1</div>
+                    <input type="number" step="1" min="0" id="any_craps" placeholder="Any Craps" class="bet-width mt-1"
+                        onchange="handleBetChange()" oninput="checkInput(this)" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-row m-1 p-1">
+        <div class="flex-col align-center">
+            <div>Roll</div>
+            <div class="flex-row align-start m-1 p-1">
+                <div class="flex-col align-center">
+                    <div>Manual</div>
+                    <input type="number" min="1" max="6" id="manual_die_1" placeholder="Die 1" class="bet-width mt-1"
+                        oninput="checkInput(this)" />
+                    <input type="number" min="1" max="6" id="manual_die_2" placeholder="Die 2" class="bet-width mt-1"
+                        oninput="checkInput(this)" />
+                    <button id="manual_roll" onclick="manualRoll()">Enter</button>
+                </div>
+                <div class="flex-col align-center m-1 p-1">
+                    <div>Auto</div>
+                    <button onclick="roll()">Roll Dice</button>
+                </div>
+            </div>
+        </div>
+        <div class="flex-col align-center">
+            <div>Last Roll</div>
+            <div class="flex-row">
+                <img id="result_die_1" src="images/one.png" width="50" height="50" />
+                <img id="result_die_2" src="images/two.png" width="50" height="50" />
+            </div>
+        </div>
+        <div class="flex-col align-center">
+            <div>Balance</div>
+            <div>$<span id="balance">1000</span></div>
+            <div>Wager</div>
+            <div>$<span id="wager">0</span></div>
+        </div>
+    </div>
+</body>
+
 </html>

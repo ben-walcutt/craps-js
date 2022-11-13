@@ -40,6 +40,10 @@ body {
     align-items: center;
 }
 
+.align-start {
+    align-items: flex-start;
+}
+
 .text-center {
     text-align: center;
 }
@@ -102,4 +106,9 @@ body {
   background-color: #000;
   border-radius: 50%;
   display: inline-block;
+}
+
+.payout {
+    font-size: 0.75rem;
+    font-weight: bold;
 }
