@@ -1,29 +1,16 @@
-function passBetChange() {
-    var passBet = $("#pass_bet").val();
-    if (passBet > 0) {
-        $("#pass_odds").prop("disabled", false);
-    } else {
-        $("#pass_odds").prop("disabled", true);
-    }
-
-    handleBetChange();
-}
-
-function dontBetChange() {
-    var dontBet = $("#dont_bet").val();
-    if (dontBet > 0) {
-        $("#dont_odds").prop("disabled", false);
-    } else {
-        $("#dont_odds").prop("disabled", true);
-    }
-}
+var balance = 1000;
+var wager = 0;
+var working = false;
+var point = 0;
+var payout = 0;
 
 function checkInput(input) {
     input.value = Math.floor(input.value);
 }
 
 function handleBetChange() {
-    var wager = 0;
+    balance += wager; // need to recalculate so we give it back
+    wager = 0;
     var passBet = $("#pass_bet").val() * 1;
     wager += passBet;
     var passOdds = $("#pass_odds").val() * 1;
@@ -131,14 +118,18 @@ function handleBetChange() {
     var anyCraps = $("#any_craps").val() * 1;
     wager += anyCraps;
 
+    balance -= wager;
     $("#wager").html(wager);
+    $("#balance").html(balance);
 }
 
 function manualRoll() {
-    var result_1 = $("#manual_die_1").val();
-    var result_2 = $("#manual_die_2").val();
+    var result_1 = $("#manual_die_1").val() * 1;
+    var result_2 = $("#manual_die_2").val() * 1;
 
     displayResult(result_1 * 1, result_2 * 1);
+    determinePayout(result_1, result_2);
+    updateGame(result_1, result_2);
 }
 
 function roll() {
@@ -146,6 +137,8 @@ function roll() {
     var result_2 = Math.floor(Math.random() * 6) + 1;
 
     displayResult(result_1, result_2);
+    determinePayout(result_1, result_2);
+    updateGame(result_1, result_2);
 }
 
 function displayResult(result_1, result_2) {
@@ -193,6 +186,143 @@ function displayResult(result_1, result_2) {
     }
 }
 
-function determineGame() {
-    
+function determinePayout(die1, die2) {
+    var rollTotal = die1 + die2;
+    var payout = 0;
+
+    if (working) {
+        if (point == rollTotal) {
+            payout += $("#pass_bet").val() * 1 * 2;
+            payout += $("#pass_odds").val() * 1;
+            payout -= $("#dont_bet").val() * 1;
+            payout -= $("#dont_odds").val() * 1;
+        }
+        if (rollTotal == 4) {
+            payout += $("#place_four").val() * 1 / 5 * 9;
+            if (point == 4) {
+                payout += $("#pass_odds").val() * 1 * 2;
+            }
+        } else if (rollTotal == 5) {
+            payout += $("#place_five").val() * 1 / 5 * 7;
+            if (point == 5) {
+                payout += $("#pass_odds").val() * 1 / 2 * 3;
+            }
+        } else if (rollTotal == 6) {
+            payout += $("#place_six").val() * 1 / 6 * 7
+            if (point == 6) {
+                payout += $("#pass_odds").val() * 1 * 1.2;
+            }
+        } else if (rollTotal == 8) {
+            payout += $("#place_eight").val() * 1 / 6 * 7;
+            if (point == 8) {
+                payout += $("#pass_odds").val() * 1 * 1.2;
+            }
+        } else if (rollTotal == 9) {
+            payout += $("#place_nine").val() * 1 / 5* 7;
+            if (point == 9) {
+                payout += $("#pass_odds").val() * 1 / 2 * 3;
+            }
+        } else if (rollTotal == 10) {
+            payout += $("#place_ten").val() * 1 / 5 * 9;
+            if (point == 10) {
+                payout += $("#pass_odds").val() * 1 * 2;
+            }
+        }
+    }
+
+    switch (rollTotal) {
+        case 4:
+            payout += $("#buy_four").val() * 1 * 2;
+            var vig = Math.ceil($("#buy_four").val() * 1 / 20);
+            payout -= vig;
+            break;
+        case 5: 
+            payout += $("#buy_five").val() * 1 / 2 * 3;
+            var vig = Math.ceil($("#buy_five").val() * 1 / 20);
+            payout -= vig;
+            break;
+        case 9:
+            payout += $("#buy_nine").val() * 1 / 2 * 3;
+            var vig = Math.ceil($("#buy_nine").val() * 1 / 20);
+            payout -= vig;
+            break;
+        case 10:
+            payout += $("#buy_ten").val() * 1 * 2;
+            var vig = Math.ceil($("#buy_ten").val() * 1 / 20);
+            payout -= vig;
+            break;
+    }
+
+    balance += payout;
+    $("#balance").html(balance);
+    $("#payout").html(payout);
+}
+
+function updateGame(die1, die2) {
+    var rollTotal = die1 + die2;
+    if (!working) {
+        if (rollTotal == 4 || rollTotal == 5 || rollTotal == 6 || rollTotal == 8 || rollTotal == 9 || rollTotal == 10) {
+            working = true;
+            $("#puck_off").addClass("hide");
+            $("#pass_bet").prop("disabled", true);
+            if ($("#pass_bet").val() * 1 > 0) {
+                $("#pass_odds").prop("disabled", false);
+            }
+            $("#dont_bet").prop("disabled", true);
+            if ($("#dont_bet").val() * 1 > 0) {
+                $("#dont_odds").prop("disabled", false);
+            }
+        }
+        switch (rollTotal) {
+            case 4:
+                point = 4;
+                $("#puck_four").removeClass("hide");
+                break;
+            case 5:
+                point = 5;
+                $("#puck_five").removeClass("hide");
+                break;
+            case 6:
+                point = 6;
+                $("#puck_six").removeClass("hide");
+                break;
+            case 8:
+                point = 8;
+                $("#puck_eight").removeClass("hide");
+                break;
+            case 9:
+                point = 9;
+                $("#puck_nine").removeClass("hide");
+                break;
+            case 10:
+                point = 10;
+                $("#puck_ten").removeClass("hide");
+        }
+    } else {
+        if (point == rollTotal || rollTotal == 7) {
+            working = false;
+            point = 0;
+            $("#pass_bet").prop("disabled", false);
+            $("#pass_odds").prop("disabled", true);
+            $("#pass_odds").val(0);
+
+            $("#dont_bet").prop("disabled", false);
+            $("#dont_odds").prop("disabled", true);
+            $("#dont_odds").val(0);
+
+            $("#puck_off").removeClass("hide");
+            $("#puck_four").addClass("hide");
+            $("#puck_five").addClass("hide");
+            $("#puck_six").addClass("hide");
+            $("#puck_eight").addClass("hide");
+            $("#puck_nine").addClass("hide");
+            $("#puck_ten").addClass("hide");
+        }
+        if (point == rollTotal) {
+            $("#dont_bet").val(0);
+        } else if (rollTotal == 7) {
+            $("#pass_bet").val(0);
+        }
+    }
+    handleBetChange();
 }

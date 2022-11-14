@@ -16,15 +16,16 @@
     <div class="flex-row">
         <div class="flex-col" id="main-bets" style="width: 66%">
             <div class="flex-row around">
-                <div id="dont_come" class="light-border p-1 m-1 number-width" style="position: relative">
-                    <img src="images/off.png" width="25" height="25" style="position: absolute" />
+                <div id="dont_come" class="light-border p-1 m-1 number-width relative">
+                    <img src="images/off.png" id="puck_off" width="25" height="25" class="absolute" />
                     <div class="text-center">
                         <h1>Don't Come</h1>
                     </div>
                     <input type="number" step="5" min="0" id="dont_come" class="bet-width mt-1"
                         oninput="checkInput(this)" />
                 </div>
-                <div id="place" class="light-border p-1 m-1 number-width">
+                <div id="place" class="light-border p-1 m-1 number-width relative">
+                    <img src="images/on.png" id="puck_four" width="25" height="25" class="absolute hide" />
                     <div class="text-center">
                         <h1>4</h1>
                     </div>
@@ -40,7 +41,8 @@
                             onchange="handleBetChange()" oninput="checkInput(this)" />
                     </div>
                 </div>
-                <div id="place" class="light-border p-1 m-1 number-width">
+                <div id="place" class="light-border p-1 m-1 number-width relative">
+                    <img src="images/on.png" id="puck_five" width="25" height="25" class="absolute hide" />
                     <div class="text-center">
                         <h1>5</h1>
                     </div>
@@ -56,7 +58,8 @@
                             onchange="handleBetChange()" oninput="checkInput(this)" />
                     </div>
                 </div>
-                <div id="place" class="light-border p-1 m-1 number-width">
+                <div id="place" class="light-border p-1 m-1 number-width relative">
+                    <img src="images/on.png" id="puck_six" width="25" height="25" class="absolute hide" />
                     <div class="text-center">
                         <h1>6</h1>
                     </div>
@@ -66,13 +69,14 @@
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
                         <input type="number" step="6" min="0" id="place_six" placeholder="Place 6"
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
-                        <input type="number" step="6" min="0" id="buy_six" placeholder="Buy 6" class="bet-width mt-1"
-                            onchange="handleBetChange()" oninput="checkInput(this)" />
-                        <input type="number" step="6" min="0" id="lay_six" placeholder="Lay 6" class="bet-width mt-1"
-                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <!-- <input type="number" step="6" min="0" id="buy_six" placeholder="Buy 6" class="bet-width mt-1" -->
+                            <!-- onchange="handleBetChange()" oninput="checkInput(this)" /> -->
+                        <!-- <input type="number" step="6" min="0" id="lay_six" placeholder="Lay 6" class="bet-width mt-1" -->
+                            <!-- onchange="handleBetChange()" oninput="checkInput(this)" /> -->
                     </div>
                 </div>
-                <div id="place" class="light-border p-1 m-1 number-width">
+                <div id="place" class="light-border p-1 m-1 number-width relative">
+                    <img src="images/on.png" id="puck_eight" width="25" height="25" class="absolute hide" />
                     <div class="text-center">
                         <h1>8</h1>
                     </div>
@@ -82,13 +86,14 @@
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
                         <input type="number" step="6" min="0" id="place_eight" placeholder="Place 8"
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" />
-                        <input type="number" step="6" min="0" id="buy_eight" placeholder="Buy 8" class="bet-width mt-1"
-                            onchange="handleBetChange()" oninput="checkInput(this)" />
-                        <input type="number" step="6" min="0" id="lay_eight" placeholder="Lay 8" class="bet-width mt-1"
-                            onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <!-- <input type="number" step="6" min="0" id="buy_eight" placeholder="Buy 8" class="bet-width mt-1" -->
+                            <!-- onchange="handleBetChange()" oninput="checkInput(this)" /> -->
+                        <!-- <input type="number" step="6" min="0" id="lay_eight" placeholder="Lay 8" class="bet-width mt-1" -->
+                            <!-- onchange="handleBetChange()" oninput="checkInput(this)" /> -->
                     </div>
                 </div>
-                <div id="place" class="light-border p-1 m-1 number-width">
+                <div id="place" class="light-border p-1 m-1 number-width relative">
+                    <img src="images/on.png" id="puck_nine" width="25" height="25" class="absolute hide" />
                     <div class="text-center">
                         <h1>9</h1>
                     </div>
@@ -104,7 +109,8 @@
                             onchange="handleBetChange()" oninput="checkInput(this)" />
                     </div>
                 </div>
-                <div id="place" class="light-border p-1 m-1 number-width">
+                <div id="place" class="light-border p-1 m-1 number-width relative">
+                    <img src="images/on.png" id="puck_ten" width="25" height="25" class="absolute hide" />
                     <div class="text-center">
                         <h1>10</h1>
                     </div>
@@ -167,7 +173,7 @@
                             <h3>Pass Bet</h3>
                         </div>
                         <div>
-                            <input type="number" step="5" min="0" id="pass_bet" onchange="passBetChange()"
+                            <input type="number" step="5" min="0" id="pass_bet" onchange="handleBetChange()"
                                 oninput="checkInput(this)" />
                         </div>
                         <div>
@@ -186,7 +192,7 @@
                             <h3>Don't Bet</h3>
                         </div>
                         <div>
-                            <input type="number" step="5" min="0" id="dont_bet" onchange="dontBetChange()"
+                            <input type="number" step="5" min="0" id="dont_bet" onchange="handleBetChange()"
                                 oninput="checkInput(this)" />
                         </div>
                         <div>
@@ -376,6 +382,8 @@
             <div>$<span id="balance">1000</span></div>
             <div>Wager</div>
             <div>$<span id="wager">0</span></div>
+            <div>Payout</div>
+            <div>$<span id="payout">0</span></div>
         </div>
     </div>
 </body>
