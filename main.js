@@ -9,7 +9,7 @@ function checkInput(input) {
 }
 
 function handleBetChange() {
-    balance += wager; // need to recalculate so we give it back
+    balance += wager;
     wager = 0;
     var passBet = $("#pass_bet").val() * 1;
     wager += passBet;
@@ -20,42 +20,46 @@ function handleBetChange() {
     var dontOdds = $("#dont_odds").val() * 1;
     wager += dontOdds;
 
-    var placeFour = $("#place_four").val() * 1;
-    wager += placeFour;
     var buyFour = $("#buy_four").val() * 1;
     wager += buyFour;
     var layFour = $("#lay_four").val() * 1;
     wager += layFour;
-    var placeFive = $("#place_five").val() * 1;
-    wager += placeFive;
     var buyFive = $("#buy_five").val() * 1;
     wager += buyFive;
     var layFive = $("#lay_five").val() * 1;
     wager += layFive;
-    var placeSix = $("#place_six").val() * 1;
-    wager += placeSix;
-    var buySix = $("#buy_six").val() * 1;
-    wager += buySix;
-    var laySix = $("#lay_six").val() * 1;
-    wager += laySix;
-    var placeEight = $("#place_eight").val() * 1;
-    wager += placeEight;
-    var buyEight = $("#buy_eight").val() * 1;
-    wager += buyEight;
-    var layEight = $("#lay_eight").val() * 1;
-    wager += layEight;
-    var placeNine = $("#place_nine").val() * 1;
-    wager += placeNine;
     var buyNine = $("#buy_nine").val() * 1;
     wager += buyNine;
     var layNine = $("#lay_nine").val() * 1;
     wager += layNine;
-    var placeTen = $("#place_ten").val() * 1;
-    wager += placeTen;
     var buyTen = $("#buy_ten").val() * 1;
     wager += buyTen;
     var layTen = $("#lay_ten").val() * 1;
     wager += layTen;
+
+    if (working) {
+        var placeFour = $("#place_four").val() * 1;
+        wager += placeFour;
+        var placeFive = $("#place_five").val() * 1;
+        wager += placeFive;
+        var placeSix = $("#place_six").val() * 1;
+        wager += placeSix;
+        var placeEight = $("#place_eight").val() * 1;
+        wager += placeEight;
+        var placeNine = $("#place_nine").val() * 1;
+        wager += placeNine;
+        var placeTen = $("#place_ten").val() * 1;
+        wager += placeTen;
+
+        var hardSix = $("#hard_six").val() * 1;
+        wager += hardSix;
+        var hardEight = $("#hard_eight").val() * 1;
+        wager += hardEight;
+        var hardFour = $("#hard_four").val() * 1;
+        wager += hardFour;
+        var hardTen = $("#hard_ten").val() * 1;
+        wager += hardTen;
+    }
 
     var comeBet = $("#come_bet").val() * 1;
     wager += comeBet;
@@ -87,15 +91,6 @@ function handleBetChange() {
 
     var field = $("#field").val() * 1;
     wager += field;
-
-    var hardSix = $("#hard_six").val() * 1;
-    wager += hardSix;
-    var hardEight = $("#hard_eight").val() * 1;
-    wager += hardEight;
-    var hardFour = $("#hard_four").val() * 1;
-    wager += hardFour;
-    var hardTen = $("#hard_ten").val() * 1;
-    wager += hardTen;
 
     var anySeven = $("#any_seven").val() * 1;
     wager += anySeven;
@@ -197,60 +192,250 @@ function determinePayout(die1, die2) {
             payout -= $("#dont_bet").val() * 1;
             payout -= $("#dont_odds").val() * 1;
         }
-        if (rollTotal == 4) {
-            payout += $("#place_four").val() * 1 / 5 * 9;
-            if (point == 4) {
-                payout += $("#pass_odds").val() * 1 * 2;
+        switch (rollTotal) {
+            case 4: {
+                payout += $("#place_four").val() * 1 / 5 * 9;
+                if (point == 4) {
+                    payout += $("#pass_odds").val() * 1 * 2;
+                }
+                if (die1 == die2) {
+                    payout += $("#hard_four").val() * 1 * 7;
+                } else {
+                    payout -= $("#hard_four").val() * 1;
+                }
+                break;
             }
-        } else if (rollTotal == 5) {
-            payout += $("#place_five").val() * 1 / 5 * 7;
-            if (point == 5) {
-                payout += $("#pass_odds").val() * 1 / 2 * 3;
+            case 5: {
+                payout += $("#place_five").val() * 1 / 5 * 7;
+                if (point == 5) {
+                    payout += $("#pass_odds").val() * 1 / 2 * 3;
+                }
+                break;
+            }   
+            case 6: {
+                payout += $("#place_six").val() * 1 / 6 * 7
+                if (point == 6) {
+                    payout += $("#pass_odds").val() * 1 * 1.2;
+                }
+                if (die1 == die2) {
+                    payout += $("#hard_six").val() * 1 * 9;
+                } else {
+                    payout -= $("#hard_six").val() * 1;
+                }
+                break;
             }
-        } else if (rollTotal == 6) {
-            payout += $("#place_six").val() * 1 / 6 * 7
-            if (point == 6) {
-                payout += $("#pass_odds").val() * 1 * 1.2;
+            case 7: {
+                payout -= $("#place_four").val() * 1;
+                payout -= $("#place_five").val() * 1;
+                payout -= $("#place_six").val() * 1;
+                payout -= $("#place_eight").val() * 1;
+                payout -= $("#place_nine").val() * 1;
+                payout -= $("#place_ten").val() * 1;
+                break;
             }
-        } else if (rollTotal == 8) {
-            payout += $("#place_eight").val() * 1 / 6 * 7;
-            if (point == 8) {
-                payout += $("#pass_odds").val() * 1 * 1.2;
+            case 8: {
+                payout += $("#place_eight").val() * 1 / 6 * 7;
+                if (point == 8) {
+                    payout += $("#pass_odds").val() * 1 * 1.2;
+                }
+                if (die1 == die2) {
+                    payout += $("#hard_eight").val() * 1 * 9;
+                } else {
+                    payout -= $("#hard_eight").val() * 1;
+                }
+                break;
             }
-        } else if (rollTotal == 9) {
-            payout += $("#place_nine").val() * 1 / 5* 7;
-            if (point == 9) {
-                payout += $("#pass_odds").val() * 1 / 2 * 3;
+            case 9: {
+                payout += $("#place_nine").val() * 1 / 5* 7;
+                if (point == 9) {
+                    payout += $("#pass_odds").val() * 1 / 2 * 3;
+                }
+                break;
             }
-        } else if (rollTotal == 10) {
-            payout += $("#place_ten").val() * 1 / 5 * 9;
-            if (point == 10) {
-                payout += $("#pass_odds").val() * 1 * 2;
+            case 10: {
+                payout += $("#place_ten").val() * 1 / 5 * 9;
+                if (point == 10) {
+                    payout += $("#pass_odds").val() * 1 * 2;
+                }
+                if (die1 == die2) {
+                    payout += $("#hard_ten").val() * 1 * 7;
+                } else {
+                    payout -= $("#hard_ten").val() * 1;
+                }
+                break;
             }
         }
     }
 
     switch (rollTotal) {
+        case 2:
+            payout += $("#horn_two").val() * 1 * 30;
+            payout += $("#horn_high_two").val() * 1 / 5 * 2 * 30;
+            payout += $("#horn_high_three").val() * 1 / 5 * 30;
+            payout += $("#horn_high_eleven").val() * 1 / 5 * 30;
+            payout += $("#horn_high_twelve").val() * 1 / 5 * 30;
+
+            payout += $("#field").val() * 1 * 2;
+
+            payout -= $("#horn_three").val() * 1;
+            payout -= $("#horn_eleven").val() * 1;
+            payout -= $("#horn_twelve").val() * 1;
+            break;
+        case 3:
+            payout += $("#horn_three").val() * 1 * 15;
+            payout += $("#horn_high_two").val() * 1 / 5 * 15;
+            payout += $("#horn_high_three").val() * 1 / 5 * 2 * 15;
+            payout += $("#horn_high_eleven").val() * 1 / 5 * 15;
+            payout += $("#horn_high_twelve").val() * 1 / 5 * 15;
+
+            payout += $("#field").val() * 1;
+ 
+            payout -= $("#horn_two").val() * 1;
+            payout -= $("#horn_eleven").val() * 1;
+            payout -= $("#horn_twelve").val() * 1;
+            break;
         case 4:
             payout += $("#buy_four").val() * 1 * 2;
-            var vig = Math.ceil($("#buy_four").val() * 1 / 20);
-            payout -= vig;
+            payout -= Math.ceil($("#buy_four").val() * 1 / 20);
+
+            payout -= $("#lay_four").val() * 1;
+
+            payout += $("#field").val() * 1;
             break;
         case 5: 
             payout += $("#buy_five").val() * 1 / 2 * 3;
-            var vig = Math.ceil($("#buy_five").val() * 1 / 20);
-            payout -= vig;
+            payout -=  Math.ceil($("#buy_five").val() * 1 / 20);
+
+            payout -= $("#lay_five").val() * 1;
+            payout -= $("#field").val() * 1;
             break;
+        case 6: {
+            payout -= $("#field").val() * 1;
+            break;
+        }
+        case 8: {
+            payout -= $("#field").val() * 1;
+            break;
+        }
         case 9:
             payout += $("#buy_nine").val() * 1 / 2 * 3;
-            var vig = Math.ceil($("#buy_nine").val() * 1 / 20);
-            payout -= vig;
+            payout -= Math.ceil($("#buy_nine").val() * 1 / 20);
+
+            payout -= $("#lay_nine").val() * 1;
+
+            payout += $("#field").val() * 1;
             break;
         case 10:
             payout += $("#buy_ten").val() * 1 * 2;
-            var vig = Math.ceil($("#buy_ten").val() * 1 / 20);
-            payout -= vig;
+            payout -= Math.ceil($("#buy_ten").val() * 1 / 20);
+
+            payout -= $("#lay_ten").val() * 1;
+
+            payout += $("#field").val() * 1;
             break;
+        case 11:
+            payout += $("#horn_eleven").val() * 1 * 15;
+            payout += $("#horn_high_two").val() * 1 / 5 * 15;
+            payout += $("#horn_high_three").val() * 1 /5 * 15;
+            payout += $("#horn_high_eleven").val() * 1 / 5 * 2 * 15;
+            payout += $("#horn_high_twelve").val() * 1 / 5 * 15;
+
+            payout += $("#field").val() * 1;
+            
+            payout -= $("#horn_two").val() * 1;
+            payout -= $("#horn_three").val() * 1;
+            payout -= $("#horn_twelve").val() * 1;
+            break;
+        case 12:
+            payout += $("#horn_twelve").val() * 1 * 30;
+            payout += $("#horn_high_two").val() * 1 / 5 * 30;
+            payout += $("#horn_high_three").val() * 1 / 5 * 30;
+            payout += $("#horn_high_eleven").val() * 1 / 5 * 30;
+            payout += $("#horn_high_twelve").val() * 1 / 5 * 2 * 30;
+
+            payout += $("#field").val() * 1 * 3;
+
+            payout -= $("#horn_two").val() * 1;
+            payout -= $("#horn_three").val() * 1;
+            payout -= $("#horn_eleven").val() * 1;
+            break;
+    }
+
+    // handle other numbers and horn bets
+    if (rollTotal != 2 && rollTotal != 3 && rollTotal != 11 && rollTotal != 12) {
+        payout -= $("#horn_two").val() * 1;
+        payout -= $("#horn_three").val() * 1;
+        payout -= $("#horn_eleven").val() * 1;
+        payout -= $("#horn_twelve").val() * 1;
+        
+        payout -= $("#horn_high_two").val() * 1;
+        payout -= $("#horn_high_three").val() * 1;
+        payout -= $("#horn_high_eleven").val() * 1;
+        payout -= $("#horn_high_twelve").val() * 1;
+
+        payout -= $("#any_craps").val() * 1;
+    } else {
+        payout += $("#any_craps").val() * 1 * 7;
+    }
+
+    // handle any seven
+    if (rollTotal == 7) {
+        payout += $("#any_seven").val() * 1 * 4;
+        payout -= $("#field").val() * 1;
+
+        var vig = 0;
+        payout += $("#lay_four").val() * 1 / 2;
+        vig += $("#lay_four").val() * 1 / 2 / 20;
+        payout += $("#lay_five").val() * 1 / 3 * 2;
+        vig += $("#lay_five").val() * 1 / 3 * 2 / 20;
+        payout += $("#lay_nine").val() * 1 / 3 * 2;
+        vig += $("#lay_nine").val() * 1 / 3 * 2 / 20;
+        payout += $("#lay_ten").val() * 1 / 2;
+        vig += $("#lay_ten").val() * 1 / 2 / 20;
+
+        payout -= vig;
+
+        payout -= $("#buy_four").val() * 1;
+        payout -= $("#buy_five").val() * 1;
+        payout -= $("#buy_nine").val() * 1;
+        payout -= $("#buy_ten").val() * 1;
+
+        if (working) {
+            payout -= $("#pass_bet").val() * 1;
+            payout -= $("#pass_odds").val() * 1;
+            payout += $("#dont_bet").val() * 1 * 2;
+
+            payout -= $("#hard_four").val() * 1;
+            payout -= $("#hard_ten").val() * 1;
+            payout -= $("#hard_six").val() * 1;
+            payout -= $("#hard_eight").val() * 1;
+
+            switch (point) {
+                case 4:
+                    payout += $("#dont_odds").val() * 1 / 2;
+                    break;
+                case 5:
+                    payout += $("#dont_odds").val() * 1 / 3 * 2;
+                    break;
+                case 6:
+                    payout += $("#dont_odds").val() * 1 / 6 * 5;
+                    break;
+                case 8: 
+                    payout += $("#dont_odds").val() * 1 / 6 * 5;
+                    break;
+                case 9:
+                    payout += $("#dont_odds").val() * 1 / 3 * 2;
+                    break;
+                case 10:
+                    payout += $("#dont_odds").val() * 1 / 2;
+                    break;
+            }
+        } else {
+            payout += $("#pass_bet").val() * 1 * 2;
+            payout -= $("#dont_bet").val() * 1;
+        }
+    } else {
+        payout -= $("#any_seven").val() * 1;
     }
 
     balance += payout;
@@ -272,6 +457,13 @@ function updateGame(die1, die2) {
             if ($("#dont_bet").val() * 1 > 0) {
                 $("#dont_odds").prop("disabled", false);
             }
+
+            $("#place_four").prop("disabled", false);
+            $("#place_five").prop("disabled", false);
+            $("#place_six").prop("disabled", false);
+            $("#place_eight").prop("disabled", false);
+            $("#place_nine").prop("disabled", false);
+            $("#place_ten").prop("disabled", false);
         }
         switch (rollTotal) {
             case 4:
@@ -299,16 +491,33 @@ function updateGame(die1, die2) {
                 $("#puck_ten").removeClass("hide");
         }
     } else {
+        if (point == rollTotal) {
+            $("#dont_bet").val("");
+        } else if (rollTotal == 7) {
+            $("#pass_bet").val("");
+            $("#place_four").val("");
+            $("#place_five").val("");
+            $("#place_six").val("");
+            $("#place_eight").val("");
+            $("#place_nine").val("");
+            $("#place_ten").val("");
+
+            $("#hard_four").val("");
+            $("#hard_six").val("");
+            $("#hard_eight").val("");
+            $("#hard_ten").val("");
+        }
+
         if (point == rollTotal || rollTotal == 7) {
             working = false;
             point = 0;
             $("#pass_bet").prop("disabled", false);
             $("#pass_odds").prop("disabled", true);
-            $("#pass_odds").val(0);
+            $("#pass_odds").val("");
 
             $("#dont_bet").prop("disabled", false);
             $("#dont_odds").prop("disabled", true);
-            $("#dont_odds").val(0);
+            $("#dont_odds").val("");
 
             $("#puck_off").removeClass("hide");
             $("#puck_four").addClass("hide");
@@ -317,12 +526,122 @@ function updateGame(die1, die2) {
             $("#puck_eight").addClass("hide");
             $("#puck_nine").addClass("hide");
             $("#puck_ten").addClass("hide");
+
+            $("#place_four").prop("disabled", true);
+            $("#place_five").prop("disabled", true);
+            $("#place_six").prop("disabled", true);
+            $("#place_eight").prop("disabled", true);
+            $("#place_nine").prop("disabled", true);
+            $("#place_ten").prop("disabled", true);
         }
-        if (point == rollTotal) {
-            $("#dont_bet").val(0);
-        } else if (rollTotal == 7) {
-            $("#pass_bet").val(0);
+
+        switch (rollTotal) {
+            case 4:
+                if (die1 != die2) {
+                    $("#hard_four").val("");
+                }
+                break;
+            case 6:
+                if (die1 != die2) {
+                    $("#hard_six").val("");
+                }
+                break;
+            case 8:
+                if (die1 != die2) {
+                    $("#hard_eight").val("");
+                }
+                break;
+            case 10:
+                if (die1 != die2) {
+                    $("#hard_ten").val("");
+                }
         }
     }
+
+    switch (rollTotal) {
+        case 4: {
+            $("#lay_four").val("");
+            break;
+        }
+        case 5: {
+            $("#lay_five").val("");
+            $("#field").val("");
+            break;
+        }
+        case 6: {
+            $("#field").val("");
+            break;
+        }
+        case 7: {
+            $("#buy_four").val("");
+            $("#buy_five").val("");
+            $("#buy_nine").val("");
+            $("#buy_ten").val("");
+
+            $("#field").val("");
+            break;
+        }
+        case 8: {
+            
+            $("#field").val("");
+            break;
+        }
+        case 9: {
+            $("#lay_nine").val("");
+            break;
+        }
+        case 10: {
+            $("#lay_ten").val("");
+            break;
+        }
+    }
+
+    // handle horns
+    if (rollTotal == 2) {
+        $("#horn_high_three").val("");
+        $("#horn_high_eleven").val("");
+        $("#horn_high_twelve").val("");
+
+        $("#horn_three").val("");
+        $("#horn_eleven").val("");
+        $("#horn_twelve").val("");
+    } else if (rollTotal == 3) {
+        $("#horn_high_two").val("");
+        $("#horn_high_eleven").val("");
+        $("#horn_high_twelve").val("");
+
+        $("#horn_two").val("");
+        $("#horn_eleven").val("");
+        $("#horn_twelve").val("");
+    } else if (rollTotal == 11) {
+        $("#horn_high_two").val("");
+        $("#horn_high_three").val("");
+        $("#horn_high_twelve").val("");
+
+        $("#horn_two").val("");
+        $("#horn_three").val("");
+        $("#horn_twelve").val("");
+    } else if (rollTotal == 12) {
+        $("#horn_high_two").val("");
+        $("#horn_high_three").val("");
+        $("#horn_high_eleven").val("");
+
+        $("#horn_two").val("");
+        $("#horn_three").val("");
+        $("#horn_eleven").val("");
+    } else {
+        $("#horn_high_two").val("");
+        $("#horn_high_three").val("");
+        $("#horn_high_eleven").val("");
+        $("#horn_high_twelve").val("");
+
+        $("#horn_two").val("");
+        $("#horn_three").val("");
+        $("#horn_eleven").val("");
+        $("#horn_twelve").val("");
+        
+        $("#any_craps").val("");
+    }
+
     handleBetChange();
 }
