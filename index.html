@@ -30,15 +30,18 @@
                         <h1>4</h1>
                     </div>
                     <div>
-                        <div id="come_four"></div>
-                        <input type="number" step="5" min="0" id="come_four_odds" placeholder="Odds"
-                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
+                        
                         <input type="number" step="5" min="0" id="place_four" placeholder="Place 4"
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="5" min="0" id="buy_four" placeholder="Buy 4" class="bet-width mt-1"
                             onchange="handleBetChange()" oninput="checkInput(this)" />
                         <input type="number" step="5" min="0" id="lay_four" placeholder="Lay 4" class="bet-width mt-1"
                             onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <div class="flex-col hide" id="come_four">
+                            <div>Come $<span id="come_four_bet"></span></div>
+                            <input type="number" step="5" min="0" id="come_four_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
@@ -47,15 +50,17 @@
                         <h1>5</h1>
                     </div>
                     <div>
-                        <div id="come_five"></div>
-                        <input type="number" step="5" min="0" id="come_five_odds" placeholder="Odds"
-                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="5" min="0" id="place_five" placeholder="Place 5"
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="5" min="0" id="buy_five" placeholder="Buy 5" class="bet-width mt-1"
                             onchange="handleBetChange()" oninput="checkInput(this)" />
                         <input type="number" step="5" min="0" id="lay_five" placeholder="Lay 5" class="bet-width mt-1"
                             onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <div class="flex-col hide" id="come_five">
+                            <div>Come $<span id="come_five_bet"></span></div>
+                            <input type="number" step="5" min="0" id="come_five_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
@@ -64,11 +69,13 @@
                         <h1>6</h1>
                     </div>
                     <div>
-                        <div id="come_six"></div>
-                        <input type="number" step="5" min="0" id="come_six_odds" placeholder="Odds"
-                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="6" min="0" id="place_six" placeholder="Place 6"
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
+                        <div class="flex-col hide" id="come_six">
+                            <div>Come $<span id="come_six_bet"></span></div>
+                            <input type="number" step="5" min="0" id="come_six_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
@@ -77,11 +84,13 @@
                         <h1>8</h1>
                     </div>
                     <div>
-                        <div id="come_eight"></div>
-                        <input type="number" step="5" min="0" id="come_eight_odds" placeholder="Odds"
-                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="6" min="0" id="place_eight" placeholder="Place 8"
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
+                        <div class="flex-col hide" id="come_eight">
+                            <div>Come $<span id="come_eight_bet"></span></div>
+                            <input type="number" step="5" min="0" id="come_eight_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
@@ -90,15 +99,17 @@
                         <h1>9</h1>
                     </div>
                     <div>
-                        <div id="come_nine"></div>
-                        <input type="number" step="5" min="0" id="come_nine_odds" placeholder="Odds"
-                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="5" min="0" id="place_nine" placeholder="Place 9"
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="5" min="0" id="buy_nine" placeholder="Buy 9" class="bet-width mt-1"
                             onchange="handleBetChange()" oninput="checkInput(this)" />
                         <input type="number" step="5" min="0" id="lay_nine" placeholder="Lay 9" class="bet-width mt-1"
                             onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <div class="flex-col hide" id="come_nine">
+                            <div>Come $<span id="come_nine_bet"></span></div>
+                            <input type="number" step="5" min="0" id="come_nine_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
@@ -107,15 +118,17 @@
                         <h1>10</h1>
                     </div>
                     <div>
-                        <div id="come_ten"></div>
-                        <input type="number" step="5" min="0" id="come_ten_odds" placeholder="Odds"
-                            class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="5" min="0" id="place_ten" placeholder="Place 10"
                             class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)" disabled />
                         <input type="number" step="5" min="0" id="buy_ten" placeholder="Buy 10" class="bet-width mt-1"
                             onchange="handleBetChange()" oninput="checkInput(this)" />
                         <input type="number" step="5" min="0" id="lay_ten" placeholder="Lay 10" class="bet-width mt-1"
                             onchange="handleBetChange()" oninput="checkInput(this)" />
+                        <div class="flex-col hide" id="come_ten">
+                            <div>Come $<span id="come_ten_bet"></span></div>
+                            <input type="number" step="5" min="0" id="come_ten_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
             </div>
