@@ -60,6 +60,19 @@ body {
     text-align: center;
 }
 
+.title {
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+.roll_result {
+    font-size: 0.5em
+}
+
+.text-bold {
+    font-weight: bolder;
+}
+
 .light-border { 
     border: 1px solid lightgray;
 }

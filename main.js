@@ -3,6 +3,24 @@ var wager = 0;
 var working = false;
 var point = 0;
 var payout = 0;
+var previousRolls = [];
+var totalRolls = 0;
+var histogram = {
+    "#histo_two": 0, 
+    "#histo_three": 0, 
+    "#histo_four": 0,
+    "#histo_five": 0,
+    "#histo_six": 0,
+    "#histo_seven": 0,
+    "#histo_eight": 0,
+    "#histo_nine": 0,
+    "#histo_ten": 0,
+    "#histo_eleven": 0,
+    "#histo_twelve": 0
+};
+var shooterCount = 1;
+var shooterRolls = 0;
+var pointsMade = 0;
 
 function checkInput(input) {
     input.value = Math.floor(input.value);
@@ -137,47 +155,159 @@ function roll() {
 }
 
 function displayResult(result_1, result_2) {
+    totalRolls++;
+    shooterRolls++;
+
+    var rollTotal = result_1 + result_2;
     var die_1 = $("#result_die_1");
     var die_2 = $("#result_die_2");
 
+    var prev1;
+    var prev2;
+
+    switch (rollTotal) {
+        case 2:
+            histogram["#histo_two"]++;
+            break;
+        case 3:
+            histogram["#histo_three"]++;
+            break;
+        case 4:
+            histogram["#histo_four"]++;
+            break;
+        case 5:
+            histogram["#histo_five"]++;
+            break;
+        case 6:
+            histogram["#histo_six"]++;
+            break;
+        case 7:
+            histogram["#histo_seven"]++;
+            break;
+        case 8:
+            histogram["#histo_eight"]++;
+            break;
+        case 9:
+            histogram["#histo_nine"]++;
+            break;
+        case 10:
+            histogram["#histo_ten"]++;
+            break;
+        case 11:
+            histogram["#histo_eleven"]++;
+            break;
+        case 12:
+            histogram["#histo_twelve"]++;
+    }
+
+    for (var key in histogram) {
+        $(key).html(histogram[key]);
+    }
+
+    $("#percent_two").html((Math.floor(histogram["#histo_two"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_three").html((Math.floor(histogram["#histo_three"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_four").html((Math.floor(histogram["#histo_four"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_five").html((Math.floor(histogram["#histo_five"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_six").html((Math.floor(histogram["#histo_six"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_seven").html((Math.floor(histogram["#histo_seven"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_eight").html((Math.floor(histogram["#histo_eight"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_nine").html((Math.floor(histogram["#histo_nine"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_ten").html((Math.floor(histogram["#histo_ten"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_eleven").html((Math.floor(histogram["#histo_eleven"] * 100 / totalRolls * 100) / 100) + "%");
+    $("#percent_twelve").html((Math.floor(histogram["#histo_twelve"] * 100 / totalRolls * 100) / 100) + "%");
+
+    $("#total_rolls").html(totalRolls);
+
+
+    // TODO: refactor to use the same image
     switch (result_1) {
         case 1:
             die_1.attr("src", "images/one.png");
+            prev1 = $("<img>", {src: "images/one.png", height: 25, width: 25});
             break;
         case 2:
             die_1.attr("src", "images/two.png");
+            prev1 = $("<img>", {src: "images/two.png", height: 25, width: 25});
             break;
         case 3:
             die_1.attr("src", "images/three.png");
+            prev1 = $("<img>", {src: "images/three.png", height: 25, width: 25});
             break;
         case 4:
             die_1.attr("src", "images/four.png");
+            prev1 = $("<img>", {src: "images/four.png", height: 25, width: 25});
             break;
         case 5:
             die_1.attr("src", "images/five.png");
+            prev1 = $("<img>", {src: "images/five.png", height: 25, width: 25});
             break;
         case 6:
             die_1.attr("src", "images/six.png");
+            prev1 = $("<img>", {src: "images/six.png", height: 25, width: 25});
     }
 
     switch (result_2) {
         case 1:
             die_2.attr("src", "images/one.png");
+            prev2 = $("<img>", {src: "images/one.png", height: 25, width: 25});
             break;
         case 2:
             die_2.attr("src", "images/two.png");
+            prev2 = $("<img>", {src: "images/two.png", height: 25, width: 25});
             break;
         case 3:
             die_2.attr("src", "images/three.png");
+            prev2 = $("<img>", {src: "images/three.png", height: 25, width: 25});
             break;
         case 4:
             die_2.attr("src", "images/four.png");
+            prev2 = $("<img>", {src: "images/four.png", height: 25, width: 25});
             break;
         case 5:
             die_2.attr("src", "images/five.png");
+            prev2 = $("<img>", {src: "images/five.png", height: 25, width: 25});
             break;
         case 6:
             die_2.attr("src", "images/six.png");
+            prev2 = $("<img>", {src: "images/six.png", height: 25, width: 25});
+    }
+
+    $("#shooter_rolls").html(shooterRolls);
+    $("#shooter_count").html(shooterCount);
+
+    $("#result").empty();
+    if (working && rollTotal == 7) {
+        shooterCount++;
+        shooterRolls = 0;
+        pointsMade = 0;
+        $("#result").append("<div>Seven Out</div>");
+    } else if (!working && rollTotal == 7) {
+        $("#result").append("<div>Winner!</div>");
+    } else if (working && rollTotal == point) {
+        pointsMade++;
+        $("#result").append("<div>Winner!</div>");
+    }
+
+    $("#points_made").html(pointsMade);
+
+    $("#previous_rolls").empty();
+
+    prevDiv = $("<div>", {class: "flex-col align-center p-1"});
+    prevDiv.append(prev1);
+    prevDiv.append(prev2);
+    prevDiv.append(rollTotal);
+    if (working && rollTotal == 7) {
+        prevDiv.append("<div class=\"roll_result\">Seven out</div>");
+    } else if (!working && rollTotal == 7) {
+        prevDiv.append("<div class=\"roll_result\">Winner!</div>");
+    } else if (working && rollTotal == point) {
+        prevDiv.append("<div class=\"roll_result\">Winner!</div>")
+    }
+
+    previousRolls.unshift(prevDiv);
+
+    for (i = 1; i < 10; i++) {
+        $("#previous_rolls").append(previousRolls[i]);
     }
 }
 
@@ -582,7 +712,6 @@ function updateGame(die1, die2) {
             break;
         }
         case 8: {
-            
             $("#field").val("");
             break;
         }
