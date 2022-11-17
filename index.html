@@ -17,13 +17,13 @@
     <div class="flex-row">
         <div class="flex-col" id="main-bets" style="width: 66%">
             <div class="flex-row around">
-                <div id="dont_come" class="light-border p-1 m-1 number-width relative">
+                <div class="light-border p-1 m-1 number-width relative">
                     <img src="images/off.png" id="puck_off" width="25" height="25" class="absolute" />
                     <div class="text-center">
                         <h1>Don't Come</h1>
                     </div>
-                    <input type="number" step="5" min="0" id="dont_come" class="bet-width mt-1"
-                        oninput="checkInput(this)" />
+                    <input type="number" step="5" min="0" id="dont_come" class="bet-width mt-1" disabled="true"
+                        oninput="checkInput(this)" onchange="handleBetChange()"/>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
                     <img src="images/on.png" id="puck_four" width="25" height="25" class="absolute hide" />
@@ -41,6 +41,11 @@
                         <div class="flex-col hide" id="come_four">
                             <div>Come $<span id="come_four_bet"></span></div>
                             <input type="number" step="5" min="0" id="come_four_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
+                        <div class="flex-col hide" id="dont_come_four">
+                            <div>Dont Come $<span id="dont_come_four_bet"></span></div>
+                            <input type="number" step="5" min="0" id="dont_come_four_odds" placeholder="Odds"
                                 class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
                         </div>
                     </div>
@@ -62,6 +67,11 @@
                             <input type="number" step="5" min="0" id="come_five_odds" placeholder="Odds"
                                 class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
                         </div>
+                        <div class="flex-col hide" id="dont_come_five">
+                            <div>Dont Come $<span id="dont_come_five_bet"></span></div>
+                            <input type="number" step="5" min="0" id="dont_come_five_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
@@ -77,6 +87,11 @@
                             <input type="number" step="5" min="0" id="come_six_odds" placeholder="Odds"
                                 class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
                         </div>
+                        <div class="flex-col hide" id="dont_come_six">
+                            <div>Dont Come $<span id="dont_come_six_bet"></span></div>
+                            <input type="number" step="5" min="0" id="dont_come_six_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
@@ -90,6 +105,11 @@
                         <div class="flex-col hide" id="come_eight">
                             <div>Come $<span id="come_eight_bet"></span></div>
                             <input type="number" step="5" min="0" id="come_eight_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
+                        <div class="flex-col hide" id="dont_come_eight">
+                            <div>Dont Come $<span id="dont_come_eight_bet"></span></div>
+                            <input type="number" step="5" min="0" id="dont_come_eight_odds" placeholder="Odds"
                                 class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
                         </div>
                     </div>
@@ -111,6 +131,11 @@
                             <input type="number" step="5" min="0" id="come_nine_odds" placeholder="Odds"
                                 class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
                         </div>
+                        <div class="flex-col hide" id="dont_come_nine">
+                            <div>Dont Come $<span id="dont_come_nine_bet"></span></div>
+                            <input type="number" step="5" min="0" id="dont_come_nine_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
                     </div>
                 </div>
                 <div id="place" class="light-border p-1 m-1 number-width relative">
@@ -128,6 +153,11 @@
                         <div class="flex-col hide" id="come_ten">
                             <div>Come $<span id="come_ten_bet"></span></div>
                             <input type="number" step="5" min="0" id="come_ten_odds" placeholder="Odds"
+                                class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
+                        </div>
+                        <div class="flex-col hide" id="dont_come_ten">
+                            <div>Dont Come $<span id="dont_come_ten_bet"></span></div>
+                            <input type="number" step="5" min="0" id="dont_come_ten_odds" placeholder="Odds"
                                 class="bet-width mt-1" onchange="handleBetChange()" oninput="checkInput(this)"/>
                         </div>
                     </div>
@@ -170,7 +200,7 @@
                 </div>
             </div>
             <div class="flex-row center">
-                <div class="flex-row evenly full-width">
+                <div class="flex-row center full-width">
                     <div id="pass" class="light-border p-1 m-1">
                         <div>
                             <h2>Pass Line</h2>
@@ -180,14 +210,14 @@
                         </div>
                         <div>
                             <input type="number" step="5" min="0" id="pass_bet" onchange="handleBetChange()"
-                                oninput="checkInput(this)" />
+                                oninput="checkInput(this)" class="bet-width mt-1" />
                         </div>
                         <div>
                             <h3>Pass Odds</h3>
                         </div>
                         <div>
                             <input type="number" step="5" min="0" id="pass_odds" disabled="true"
-                                onchange="handleBetChange()" oninput="checkInput(this)" />
+                                onchange="handleBetChange()" oninput="checkInput(this)" class="bet-width mt-1" />
                         </div>
                     </div>
                     <div id="dont" class="light-border p-1 m-1">
@@ -198,7 +228,7 @@
                             <h3>Don't Bet</h3>
                         </div>
                         <div>
-                            <input type="number" step="5" min="0" id="dont_bet" onchange="handleBetChange()"
+                            <input type="number" step="5" min="0" id="dont_bet" onchange="handleBetChange()" class="bet-width mt-1"
                                 oninput="checkInput(this)" />
                         </div>
                         <div>
@@ -206,7 +236,7 @@
                         </div>
                         <div>
                             <input type="number" step="5" min="0" id="dont_odds" disabled="true"
-                                onchange="handleBetChange()" oninput="checkInput(this)" />
+                                onchange="handleBetChange()" oninput="checkInput(this)" class="bet-width mt-1" />
                         </div>
                     </div>
                 </div>

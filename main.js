@@ -55,6 +55,13 @@ function handleBetChange() {
     var layTen = $("#lay_ten").val() * 1;
     wager += layTen;
 
+    var dontCome = $("#dont_come").val() * 1;
+    wager += dontCome;
+    var dontComeFour = $("#dont_come_four_bet").html() * 1;
+    wager += dontComeFour;
+    var dontComeFourOdds = $("#dont_come_four_odds").val() * 1;
+    wager += dontComeFourOdds;
+
     if (working) {
         var placeFour = $("#place_four").val() * 1;
         wager += placeFour;
@@ -281,7 +288,7 @@ function displayResult(result_1, result_2) {
         shooterRolls = 0;
         pointsMade = 0;
         $("#result").append("<div>Seven Out</div>");
-    } else if (!working && rollTotal == 7) {
+    } else if (!working && (rollTotal == 7 || rollTotal == 11)) {
         $("#result").append("<div>Winner!</div>");
     } else if (working && rollTotal == point) {
         pointsMade++;
@@ -395,6 +402,20 @@ function determinePayout(die1, die2) {
                 break;
             }
         }
+    } else {
+        switch (rollTotal) {
+            case 2:
+            case 3:
+                payout -= $("#pass_bet").val() * 1;
+                payout += $("#dont_bet").val() * 1;
+                break;
+            case 11:
+                payout += $("#pass_bet").val() * 1;
+                payout -= $("#dont_bet").val() * 1;
+                break;
+            case 12:
+                payout -= $("#pass_bet").val() * 1;
+        }
     }
 
     switch (rollTotal) {
@@ -412,6 +433,7 @@ function determinePayout(die1, die2) {
             payout -= $("#horn_twelve").val() * 1;
 
             payout -= $("#come_bet").val() * 1;
+            payout += $("#dont_come").val() * 1;
             break;
         case 3:
             payout += $("#horn_three").val() * 1 * 15;
@@ -427,6 +449,7 @@ function determinePayout(die1, die2) {
             payout -= $("#horn_twelve").val() * 1;
 
             payout -= $("#come_bet").val() * 1;
+            payout += $("#dont_come").val() * 1;
             break;
         case 4:
             payout += $("#buy_four").val() * 1 * 2;
@@ -435,8 +458,11 @@ function determinePayout(die1, die2) {
             payout -= $("#lay_four").val() * 1;
 
             payout += $("#field").val() * 1;
-            payout += $("#come_four_bet").html() * 1 * 1;
+            payout += $("#come_four_bet").html() * 1;
             payout += $("#come_four_odds").val() * 1 * 2;
+
+            payout -= $("#dont_come_four_bet").html() * 1;
+            payout -= $("#dont_come_four_odds").val() * 1;
             break;
         case 5: 
             payout += $("#buy_five").val() * 1 / 2 * 3;
@@ -446,17 +472,26 @@ function determinePayout(die1, die2) {
             payout -= $("#field").val() * 1;
             payout += $("#come_five_bet").html() * 1;
             payout += $("#come_five_odds").val() * 1 / 2 * 3;
+
+            payout -= $("#dont_come_five_bet").html() * 1;
+            payout -= $("#dont_come_five_odds").val() * 1;
             break;
         case 6: {
             payout -= $("#field").val() * 1;
             payout += $("#come_six_bet").html() * 1;
             payout += $("#come_six_odds").val() * 1 / 5 * 6;
+
+            payout -= $("#dont_come_six_bet").html() * 1;
+            payout -= $("#dont_come_six_odds").val() * 1;
             break;
         }
         case 8: {
             payout -= $("#field").val() * 1;
             payout += $("#come_eight_bet").html() * 1;
             payout += $("#come_eight_odds").val() * 1 / 5 * 6;
+
+            payout -= $("#dont_come_eight_bet").html() * 1;
+            payout -= $("#dont_come_eight_odds").val() * 1;
             break;
         }
         case 9:
@@ -468,6 +503,9 @@ function determinePayout(die1, die2) {
             payout += $("#field").val() * 1;
             payout += $("#come_nine_bet").html() * 1;
             payout += $("#come_nine_odds").val() * 1 / 2 * 3;
+
+            payout -= $("#dont_come_nine_bet").html() * 1;
+            payout -= $("#dont_come_nine_odds").val() * 1;
             break;
         case 10:
             payout += $("#buy_ten").val() * 1 * 2;
@@ -478,6 +516,9 @@ function determinePayout(die1, die2) {
             payout += $("#field").val() * 1;
             payout += $("#come_ten_bet").html() * 1;
             payout += $("#come_ten_odds").val() * 1 * 2;
+
+            payout -= $("#dont_come_ten_bet").html() * 1;
+            payout -= $("#dont_come_ten_odds").val() * 1;
             break;
         case 11:
             payout += $("#horn_eleven").val() * 1 * 15;
@@ -492,6 +533,8 @@ function determinePayout(die1, die2) {
             payout -= $("#horn_two").val() * 1;
             payout -= $("#horn_three").val() * 1;
             payout -= $("#horn_twelve").val() * 1;
+
+            payout -= $("#dont_come").val() * 1;
             break;
         case 12:
             payout += $("#horn_twelve").val() * 1 * 30;
@@ -542,6 +585,19 @@ function determinePayout(die1, die2) {
         payout += $("#lay_ten").val() * 1 / 2;
         vig += $("#lay_ten").val() * 1 / 2 / 20;
 
+        payout += $("#dont_come_four_bet").html() * 1;
+        payout += $("#dont_come_four_odds").val() * 1 / 2;
+        payout += $("#dont_come_five_bet").html() * 1;
+        payout += $("#dont_come_five_odds").val() * 1 / 3 * 2;
+        payout += $("#dont_come_six_bet").html() * 1;
+        payout += $("#dont_come_six_odds").val() * 1 / 6 * 5;
+        payout += $("#dont_come_eight_bet").html() * 1;
+        payout += $("#dont_come_eight_odds").val() * 1 / 6 * 5;
+        payout += $("#dont_come_nine_bet").html() * 1;
+        payout += $("#dont_come_nine_odds").val() * 1 / 3 * 2;
+        payout += $("#dont_come_ten_bet").html() * 1;
+        payout += $("#dont_come_ten_odds").val() * 1 / 2;
+
         payout -= vig;
 
         payout -= $("#buy_four").val() * 1;
@@ -552,7 +608,7 @@ function determinePayout(die1, die2) {
         if (working) {
             payout -= $("#pass_bet").val() * 1;
             payout -= $("#pass_odds").val() * 1;
-            payout += $("#dont_bet").val() * 1 * 2;
+            payout += $("#dont_bet").val() * 1;
 
             payout -= $("#hard_four").val() * 1;
             payout -= $("#hard_ten").val() * 1;
@@ -594,7 +650,7 @@ function determinePayout(die1, die2) {
                     break;
             }
         } else {
-            payout += $("#pass_bet").val() * 1 * 2;
+            payout += $("#pass_bet").val() * 1;
             payout -= $("#dont_bet").val() * 1;
         }
     } else {
@@ -628,8 +684,13 @@ function updateGame(die1, die2) {
             $("#place_ten").prop("disabled", false);
 
             $("#come_bet").prop("disabled", false);
+            $("#dont_come").prop("disabled", false);
         }
         switch (rollTotal) {
+            case 2:
+            case 3:
+                $("#pass_bet").val("");
+                break;
             case 4:
                 $("#puck_four").removeClass("hide");
                 break;
@@ -639,6 +700,9 @@ function updateGame(die1, die2) {
             case 6:
                 $("#puck_six").removeClass("hide");
                 break;
+            case 7:
+                $("#dont_bet").val("");
+                break;
             case 8:
                 $("#puck_eight").removeClass("hide");
                 break;
@@ -647,6 +711,12 @@ function updateGame(die1, die2) {
                 break;
             case 10:
                 $("#puck_ten").removeClass("hide");
+                break;
+            case 11:
+                $("#dont_bet").val("");
+                break;
+            case 12:
+                $("#pass_bet").val("");
         }
     } else {
         if (point == rollTotal) {
@@ -677,6 +747,8 @@ function updateGame(die1, die2) {
             $("#dont_odds").prop("disabled", true);
             $("#dont_odds").val("");
 
+            $("#dont_come").prop("disabled", true);
+
             $("#puck_off").removeClass("hide");
             $("#puck_four").addClass("hide");
             $("#puck_five").addClass("hide");
@@ -694,6 +766,7 @@ function updateGame(die1, die2) {
         }
 
         var comeBet = $("#come_bet").val() * 1;
+        var dontComeBet = $("#dont_come").val() * 1;
         switch (rollTotal) {
             case 4:
                 if (comeBet > 0) {
@@ -703,6 +776,18 @@ function updateGame(die1, die2) {
                     $("#come_four_bet").html("");
                     $("#come_four_odds").val("");
                     $("#come_four").addClass("hide");
+                }
+                if ($("#dont_come_four_bet").html() * 1 > 0) {
+                    $("#dont_come_four_bet").html("");
+                    $("#dont_come_four_odds").val("");
+                }
+                if (dontComeBet > 0) {
+                    $("#dont_come_four_bet").html(dontComeBet);
+                    $("#dont_come_four").removeClass("hide");
+                } else {
+                    $("#dont_come_four_bet").html("");
+                    $("#dont_come_four_odds").val("");
+                    $("#dont_come_four").addClass("hide");
                 }
                 if (die1 != die2) {
                     $("#hard_four").val("");
@@ -717,6 +802,18 @@ function updateGame(die1, die2) {
                     $("#come_five_odds").val("");
                     $("#come_five").addClass("hide");
                 }
+                if ($("#dont_come_five_bet").html() * 1 > 0) {
+                    $("#dont_come_five_bet").html("");
+                    $("#dont_come_five_odds").val("");
+                }
+                if (dontComeBet > 0) {
+                    $("#dont_come_five_bet").html(dontComeBet);
+                    $("#dont_come_five").removeClass("hide");
+                } else {
+                    $("#dont_come_five_bet").html("");
+                    $("#dont_come_five_odds").val("");
+                    $("#dont_come_five").addClass("hide");
+                }
                 break;
             case 6:
                 if (comeBet > 0) {
@@ -726,6 +823,18 @@ function updateGame(die1, die2) {
                     $("#come_six_bet").html("");
                     $("#come_six_odds").val("");
                     $("#come_six").addClass("hide");
+                }
+                if ($("#dont_come_six_bet").html() * 1 > 0) {
+                    $("#dont_come_six_bet").html("");
+                    $("#dont_come_six_odds").val("");
+                }
+                if (dontComeBet > 0) {
+                    $("#dont_come_six_bet").html(dontComeBet);
+                    $("#dont_come_six").removeClass("hide");
+                } else {
+                    $("#dont_come_six_bet").html("");
+                    $("#dont_come_six_odds").val("");
+                    $("#dont_come_six").addClass("hide");
                 }
                 if (die1 != die2) {
                     $("#hard_six").val("");
@@ -740,6 +849,18 @@ function updateGame(die1, die2) {
                     $("#come_eight_odds").val("");
                     $("#come_eight").addClass("hide");
                 }
+                if ($("#dont_come_eight_bet").html() * 1 > 0) {
+                    $("#dont_come_eight_bet").html("");
+                    $("#dont_come_eight_odds").val("");
+                }
+                if (dontComeBet > 0) {
+                    $("#dont_come_eight_bet").html(dontComeBet);
+                    $("#dont_come_eight").removeClass("hide");
+                } else {
+                    $("#dont_come_eight_bet").html("");
+                    $("#dont_come_eight_odds").val("");
+                    $("#dont_come_eight").addClass("hide");
+                }
                 if (die1 != die2) {
                     $("#hard_eight").val("");
                 }
@@ -753,6 +874,18 @@ function updateGame(die1, die2) {
                     $("#come_nine_odds").val("");
                     $("#come_nine").addClass("hide");
                 }
+                if ($("#dont_come_nine_bet").html() * 1 > 0) {
+                    $("#dont_come_nine_bet").html("");
+                    $("#dont_come_nine_odds").val("");
+                }
+                if (dontComeBet > 0) {
+                    $("#dont_come_nine_bet").html(dontComeBet);
+                    $("#dont_come_nine").removeClass("hide");
+                } else {
+                    $("#dont_come_nine_bet").html("");
+                    $("#dont_come_nine_odds").val("");
+                    $("#dont_come_nine").addClass("hide");
+                }
                 break;
             case 10:
                 if (comeBet > 0) {
@@ -762,6 +895,18 @@ function updateGame(die1, die2) {
                     $("#come_ten_bet").html("");
                     $("#come_ten_odds").val("");
                     $("#come_ten").addClass("hide");
+                }
+                if ($("#dont_come_ten_bet").html() * 1 > 0) {
+                    $("#dont_come_ten_bet").html("");
+                    $("#dont_come_ten_odds").val("");
+                }
+                if (dontComeBet > 0) {
+                    $("#dont_come_ten_bet").html(dontComeBet);
+                    $("#dont_come_ten").removeClass("hide");
+                } else {
+                    $("#dont_come_ten_bet").html("");
+                    $("#dont_come_ten_odds").val("");
+                    $("#dont_come_ten").addClass("hide");
                 }
                 if (die1 != die2) {
                     $("#hard_ten").val("");
@@ -790,23 +935,42 @@ function updateGame(die1, die2) {
             $("#buy_ten").val("");
 
             $("#come_four").addClass("hide");
-            $("#come_four_bet").val("");
+            $("#come_four_bet").html("");
             $("#come_four_odds").val("");
             $("#come_five").addClass("hide");
-            $("#come_five_bet").val("");
+            $("#come_five_bet").html("");
             $("#come_five_odds").val("");
             $("#come_six").addClass("hide");
-            $("#come_six_bet").val("");
+            $("#come_six_bet").html("");
             $("#come_six_odds").val("");
             $("#come_eight").addClass("hide");
-            $("#come_eight_bet").val("");
+            $("#come_eight_bet").html("");
             $("#come_eight_odds").val("");
             $("#come_nine").addClass("hide");
-            $("#come_nine_bet").val("");
+            $("#come_nine_bet").html("");
             $("#come_nine_odds").val("");
             $("#come_ten").addClass("hide");
-            $("#come_ten_bet").val("");
+            $("#come_ten_bet").html("");
             $("#come_ten_odds").val("");
+
+            $("#dont_come_four").addClass("hide");
+            $("#dont_come_four_bet").html("");
+            $("#dont_come_four_odds").val("");
+            $("#dont_come_five").addClass("hide");
+            $("#dont_come_five_bet").html("");
+            $("#dont_come_five_odds").val("");
+            $("#dont_come_six").addClass("hide");
+            $("#dont_come_six_bet").html("");
+            $("#dont_come_six_odds").val("");
+            $("#dont_come_eight").addClass("hide");
+            $("#dont_come_eight_bet").html("");
+            $("#dont_come_eight_odds").val("");
+            $("#dont_come_nine").addClass("hide");
+            $("#dont_come_nine_bet").html("");
+            $("#dont_come_nine_odds").val("");
+            $("#dont_come_ten").addClass("hide");
+            $("#dont_come_ten_bet").html("");
+            $("#dont_come_ten_odds").val("");
 
             $("#field").val("");
             break;
@@ -854,6 +1018,8 @@ function updateGame(die1, die2) {
         $("#horn_two").val("");
         $("#horn_three").val("");
         $("#horn_twelve").val("");
+
+        $("#dont_come").val("");
     } else if (rollTotal == 12) {
         $("#horn_high_two").val("");
         $("#horn_high_three").val("");
@@ -876,6 +1042,7 @@ function updateGame(die1, die2) {
         $("#horn_twelve").val("");
         
         $("#any_craps").val("");
+        $("#dont_come").val("");
     }
 
     // come bet comes down except on 11
@@ -887,9 +1054,15 @@ function updateGame(die1, die2) {
     if (rollTotal == 7 || point == rollTotal) {
         working = false;
         point = 0;
+        $("#come_bet").prop("disabled", true);
+        $("#dont_come").prop("disabled", true);
     } else if (!working && (rollTotal == 4 || rollTotal == 5 || rollTotal == 6 || rollTotal == 8 || rollTotal == 9 || rollTotal == 10)) {
         working = true;
         point = rollTotal;
+    }
+    
+    if (rollTotal !== 7) {
+        $("#any_seven").val("");
     }
 
     handleBetChange();
