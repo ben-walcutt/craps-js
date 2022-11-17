@@ -694,7 +694,6 @@ function updateGame(die1, die2) {
         }
 
         var comeBet = $("#come_bet").val() * 1;
-        console.log(comeBet);
         switch (rollTotal) {
             case 4:
                 if (comeBet > 0) {
@@ -888,7 +887,7 @@ function updateGame(die1, die2) {
     if (rollTotal == 7 || point == rollTotal) {
         working = false;
         point = 0;
-    } else if (!working && rollTotal == 4 || rollTotal == 5 || rollTotal == 6 || rollTotal == 8 || rollTotal == 9 || rollTotal == 10) {
+    } else if (!working && (rollTotal == 4 || rollTotal == 5 || rollTotal == 6 || rollTotal == 8 || rollTotal == 9 || rollTotal == 10)) {
         working = true;
         point = rollTotal;
     }
