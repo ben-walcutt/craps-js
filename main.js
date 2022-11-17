@@ -1067,3 +1067,9 @@ function updateGame(die1, die2) {
 
     handleBetChange();
 }
+
+function buyin() {
+    balance += $("#buy_in").val() * 1;
+    handleBetChange();
+    $("#buy_in").val("");
+}
