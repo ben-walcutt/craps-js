@@ -398,11 +398,11 @@
                         oninput="checkInput(this)" />
                     <input type="number" min="1" max="6" id="manual_die_2" placeholder="Die 2" class="bet-width mt-1"
                         oninput="checkInput(this)" />
-                    <button id="manual_roll" onclick="manualRoll()">Enter</button>
+                    <button id="manual_roll" onclick="manualRoll()" id="manual_roll" disabled>Enter</button>
                 </div>
                 <div class="flex-col align-center m-1 p-1">
                     <div>Auto</div>
-                    <button onclick="roll()">Roll Dice</button>
+                    <button onclick="roll()" id="auto_roll" disabled>Roll Dice</button>
                 </div>
             </div>
         </div>
@@ -416,7 +416,7 @@
         </div>
         <div class="flex-col align-center m-1 p-1">
             <div class="title">Balance</div>
-            <div>$<span id="balance">1000</span></div>
+            <div>$<span id="balance">0</span></div>
             <div class="text-bold">Wager</div>
             <div>$<span id="wager">0</span></div>
             <div class="text-bold">Payout</div>

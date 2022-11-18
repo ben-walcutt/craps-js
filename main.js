@@ -1,4 +1,4 @@
-var balance = 1000;
+var balance = 0;
 var wager = 0;
 var working = false;
 var point = 0;
@@ -141,6 +141,14 @@ function handleBetChange() {
     balance -= wager;
     $("#wager").html(wager);
     $("#balance").html(balance);
+
+    if (balance < 0) {
+        $("#auto_roll").prop("disabled", true);
+        $("#manual_roll").prop("disabled", true);
+    } else {
+        $("#auto_roll").prop("disabled", false);
+        $("#manual_roll").prop("disabled", false);
+    }
 }
 
 function manualRoll() {
@@ -324,7 +332,7 @@ function determinePayout(die1, die2) {
 
     if (working) {
         if (point == rollTotal) {
-            payout += $("#pass_bet").val() * 1 * 2;
+            payout += $("#pass_bet").val() * 1;
             payout += $("#pass_odds").val() * 1;
             payout -= $("#dont_bet").val() * 1;
             payout -= $("#dont_odds").val() * 1;
@@ -693,24 +701,30 @@ function updateGame(die1, die2) {
                 break;
             case 4:
                 $("#puck_four").removeClass("hide");
+                $("#pass_odds").prop("max", $("#pass_bet").val() * 5);
                 break;
             case 5:
                 $("#puck_five").removeClass("hide");
+                $("#pass_odds").prop("max", $("#pass_bet").val() * 4);
                 break;
             case 6:
                 $("#puck_six").removeClass("hide");
+                $("#pass_odds").prop("max", $("#pass_bet").val() * 3);
                 break;
             case 7:
                 $("#dont_bet").val("");
                 break;
             case 8:
                 $("#puck_eight").removeClass("hide");
+                $("#pass_odds").prop("max", $("#pass_bet").val() * 3);
                 break;
             case 9:
                 $("#puck_nine").removeClass("hide");
+                $("#pass_odds").prop("max", $("#pass_bet").val() * 4);
                 break;
             case 10:
                 $("#puck_ten").removeClass("hide");
+                $("#pass_odds").prop("max", $("#pass_bet").val() * 5);
                 break;
             case 11:
                 $("#dont_bet").val("");
