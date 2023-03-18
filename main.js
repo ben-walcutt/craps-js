@@ -333,7 +333,6 @@ function determinePayout(die1, die2) {
     if (working) {
         if (point == rollTotal) {
             payout += $("#pass_bet").val() * 1;
-            payout += $("#pass_odds").val() * 1;
             payout -= $("#dont_bet").val() * 1;
             payout -= $("#dont_odds").val() * 1;
         }
