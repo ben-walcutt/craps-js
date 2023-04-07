@@ -338,7 +338,7 @@ function determinePayout(die1, die2) {
         }
         switch (rollTotal) {
             case 4: {
-                payout += $("#place_four").val() * 1 / 5 * 9;
+                payout += Math.floor($("#place_four").val() * 1 / 5 * 9);
                 if (point == 4) {
                     payout += $("#pass_odds").val() * 1 * 2;
                 }
@@ -350,16 +350,16 @@ function determinePayout(die1, die2) {
                 break;
             }
             case 5: {
-                payout += $("#place_five").val() * 1 / 5 * 7;
+                payout += Math.floor($("#place_five").val() * 1 / 5 * 7);
                 if (point == 5) {
-                    payout += $("#pass_odds").val() * 1 / 2 * 3;
+                    payout += Math.floor($("#pass_odds").val() * 1 / 2 * 3);
                 }
                 break;
             }   
             case 6: {
-                payout += $("#place_six").val() * 1 / 6 * 7
+                payout += Math.floor($("#place_six").val() * 1 / 6 * 7);
                 if (point == 6) {
-                    payout += $("#pass_odds").val() * 1 * 1.2;
+                    payout += Math.floor($("#pass_odds").val() * 1 * 1.2);
                 }
                 if (die1 == die2) {
                     payout += $("#hard_six").val() * 1 * 9;
@@ -378,9 +378,9 @@ function determinePayout(die1, die2) {
                 break;
             }
             case 8: {
-                payout += $("#place_eight").val() * 1 / 6 * 7;
+                payout += Math.floor($("#place_eight").val() * 1 / 6 * 7);
                 if (point == 8) {
-                    payout += $("#pass_odds").val() * 1 * 1.2;
+                    payout += Math.floor($("#pass_odds").val() * 1 * 1.2);
                 }
                 if (die1 == die2) {
                     payout += $("#hard_eight").val() * 1 * 9;
@@ -390,14 +390,14 @@ function determinePayout(die1, die2) {
                 break;
             }
             case 9: {
-                payout += $("#place_nine").val() * 1 / 5* 7;
+                payout += Math.floor($("#place_nine").val() * 1 / 5 * 7);
                 if (point == 9) {
-                    payout += $("#pass_odds").val() * 1 / 2 * 3;
+                    payout += Math.floor($("#pass_odds").val() * 1 / 2 * 3);
                 }
                 break;
             }
             case 10: {
-                payout += $("#place_ten").val() * 1 / 5 * 9;
+                payout += Math.floor($("#place_ten").val() * 1 / 5 * 9);
                 if (point == 10) {
                     payout += $("#pass_odds").val() * 1 * 2;
                 }
@@ -413,56 +413,56 @@ function determinePayout(die1, die2) {
         switch (rollTotal) {
             case 2:
             case 3:
-                payout -= $("#pass_bet").val() * 1;
-                payout += $("#dont_bet").val() * 1;
+                payout -= Math.floor($("#pass_bet").val() * 1);
+                payout += Math.floor($("#dont_bet").val() * 1);
                 break;
             case 11:
-                payout += $("#pass_bet").val() * 1;
-                payout -= $("#dont_bet").val() * 1;
+                payout += Math.floor($("#pass_bet").val() * 1);
+                payout -= Math.floor($("#dont_bet").val() * 1);
                 break;
             case 12:
-                payout -= $("#pass_bet").val() * 1;
+                payout -= Math.floor($("#pass_bet").val() * 1);
         }
     }
 
     switch (rollTotal) {
         case 2:
-            payout += $("#horn_two").val() * 1 * 30;
-            payout += $("#horn_high_two").val() * 1 / 5 * 2 * 30;
-            payout += $("#horn_high_three").val() * 1 / 5 * 30;
-            payout += $("#horn_high_eleven").val() * 1 / 5 * 30;
-            payout += $("#horn_high_twelve").val() * 1 / 5 * 30;
+            payout += Math.floor($("#horn_two").val() * 1 * 30);
+            payout += Math.floor($("#horn_high_two").val() * 1 / 5 * 2 * 30);
+            payout += Math.floor($("#horn_high_three").val() * 1 / 5 * 30);
+            payout += Math.floor($("#horn_high_eleven").val() * 1 / 5 * 30);
+            payout += Math.floor($("#horn_high_twelve").val() * 1 / 5 * 30);
 
-            payout += $("#field").val() * 1 * 2;
+            payout += Math.floor($("#field").val() * 1 * 2);
 
-            payout -= $("#horn_three").val() * 1;
-            payout -= $("#horn_eleven").val() * 1;
-            payout -= $("#horn_twelve").val() * 1;
+            payout -= Math.floor($("#horn_three").val() * 1);
+            payout -= Math.floor($("#horn_eleven").val() * 1);
+            payout -= Math.floor($("#horn_twelve").val() * 1);
 
-            payout -= $("#come_bet").val() * 1;
-            payout += $("#dont_come").val() * 1;
+            payout -= Math.floor($("#come_bet").val() * 1);
+            payout += Math.floor($("#dont_come").val() * 1);
             break;
         case 3:
-            payout += $("#horn_three").val() * 1 * 15;
-            payout += $("#horn_high_two").val() * 1 / 5 * 15;
-            payout += $("#horn_high_three").val() * 1 / 5 * 2 * 15;
-            payout += $("#horn_high_eleven").val() * 1 / 5 * 15;
-            payout += $("#horn_high_twelve").val() * 1 / 5 * 15;
+            payout += Math.floor($("#horn_three").val() * 1 * 15);
+            payout += Math.floor($("#horn_high_two").val() * 1 / 5 * 15);
+            payout += Math.floor($("#horn_high_three").val() * 1 / 5 * 2 * 15);
+            payout += Math.floor($("#horn_high_eleven").val() * 1 / 5 * 15);
+            payout += Math.floor($("#horn_high_twelve").val() * 1 / 5 * 15);
 
-            payout += $("#field").val() * 1;
+            payout += Math.floor($("#field").val() * 1);
  
-            payout -= $("#horn_two").val() * 1;
-            payout -= $("#horn_eleven").val() * 1;
-            payout -= $("#horn_twelve").val() * 1;
+            payout -= Math.floor($("#horn_two").val() * 1);
+            payout -= Math.floor($("#horn_eleven").val() * 1);
+            payout -= Math.floor($("#horn_twelve").val() * 1);
 
-            payout -= $("#come_bet").val() * 1;
-            payout += $("#dont_come").val() * 1;
+            payout -= Math.floor($("#come_bet").val() * 1);
+            payout += Math.floor($("#dont_come").val() * 1);
             break;
         case 4:
-            payout += $("#buy_four").val() * 1 * 2;
+            payout += Math.floor($("#buy_four").val() * 1 * 2);
             payout -= Math.ceil($("#buy_four").val() * 1 / 20);
 
-            payout -= $("#lay_four").val() * 1;
+            payout -= Math.floor($("#lay_four").val() * 1);
 
             payout += $("#field").val() * 1;
             payout += $("#come_four_bet").html() * 1;
@@ -478,7 +478,7 @@ function determinePayout(die1, die2) {
             payout -= $("#lay_five").val() * 1;
             payout -= $("#field").val() * 1;
             payout += $("#come_five_bet").html() * 1;
-            payout += $("#come_five_odds").val() * 1 / 2 * 3;
+            payout += Math.floor($("#come_five_odds").val() * 1 / 2 * 3);
 
             payout -= $("#dont_come_five_bet").html() * 1;
             payout -= $("#dont_come_five_odds").val() * 1;
@@ -486,7 +486,7 @@ function determinePayout(die1, die2) {
         case 6: {
             payout -= $("#field").val() * 1;
             payout += $("#come_six_bet").html() * 1;
-            payout += $("#come_six_odds").val() * 1 / 5 * 6;
+            payout += Math.floor($("#come_six_odds").val() * 1 / 5 * 6);
 
             payout -= $("#dont_come_six_bet").html() * 1;
             payout -= $("#dont_come_six_odds").val() * 1;
@@ -495,7 +495,7 @@ function determinePayout(die1, die2) {
         case 8: {
             payout -= $("#field").val() * 1;
             payout += $("#come_eight_bet").html() * 1;
-            payout += $("#come_eight_odds").val() * 1 / 5 * 6;
+            payout += Math.floor($("#come_eight_odds").val() * 1 / 5 * 6);
 
             payout -= $("#dont_come_eight_bet").html() * 1;
             payout -= $("#dont_come_eight_odds").val() * 1;
@@ -509,7 +509,7 @@ function determinePayout(die1, die2) {
 
             payout += $("#field").val() * 1;
             payout += $("#come_nine_bet").html() * 1;
-            payout += $("#come_nine_odds").val() * 1 / 2 * 3;
+            payout += Math.floor($("#come_nine_odds").val() * 1 / 2 * 3);
 
             payout -= $("#dont_come_nine_bet").html() * 1;
             payout -= $("#dont_come_nine_odds").val() * 1;
@@ -529,10 +529,10 @@ function determinePayout(die1, die2) {
             break;
         case 11:
             payout += $("#horn_eleven").val() * 1 * 15;
-            payout += $("#horn_high_two").val() * 1 / 5 * 15;
-            payout += $("#horn_high_three").val() * 1 /5 * 15;
-            payout += $("#horn_high_eleven").val() * 1 / 5 * 2 * 15;
-            payout += $("#horn_high_twelve").val() * 1 / 5 * 15;
+            payout += Math.floor($("#horn_high_two").val() * 1 / 5 * 15);
+            payout += Math.floor($("#horn_high_three").val() * 1 / 5 * 15);
+            payout += Math.floor($("#horn_high_eleven").val() * 1 / 5 * 2 * 15);
+            payout += Math.floor($("#horn_high_twelve").val() * 1 / 5 * 15);
 
             payout += $("#field").val() * 1;
             payout += $("#come_bet").val() * 1;
@@ -545,10 +545,10 @@ function determinePayout(die1, die2) {
             break;
         case 12:
             payout += $("#horn_twelve").val() * 1 * 30;
-            payout += $("#horn_high_two").val() * 1 / 5 * 30;
-            payout += $("#horn_high_three").val() * 1 / 5 * 30;
-            payout += $("#horn_high_eleven").val() * 1 / 5 * 30;
-            payout += $("#horn_high_twelve").val() * 1 / 5 * 2 * 30;
+            payout += Math.floor($("#horn_high_two").val() * 1 / 5 * 30);
+            payout += Math.floor($("#horn_high_three").val() * 1 / 5 * 30);
+            payout += Math.floor($("#horn_high_eleven").val() * 1 / 5 * 30);
+            payout += Math.floor($("#horn_high_twelve").val() * 1 / 5 * 2 * 30);
 
             payout += $("#field").val() * 1 * 3;
 
@@ -584,26 +584,26 @@ function determinePayout(die1, die2) {
 
         var vig = 0;
         payout += $("#lay_four").val() * 1 / 2;
-        vig += $("#lay_four").val() * 1 / 2 / 20;
+        vig += Math.floor($("#lay_four").val() * 1 / 2 / 20);
         payout += $("#lay_five").val() * 1 / 3 * 2;
-        vig += $("#lay_five").val() * 1 / 3 * 2 / 20;
+        vig += Math.floor($("#lay_five").val() * 1 / 3 * 2 / 20);
         payout += $("#lay_nine").val() * 1 / 3 * 2;
-        vig += $("#lay_nine").val() * 1 / 3 * 2 / 20;
+        vig += Math.floor($("#lay_nine").val() * 1 / 3 * 2 / 20);
         payout += $("#lay_ten").val() * 1 / 2;
-        vig += $("#lay_ten").val() * 1 / 2 / 20;
+        vig += Math.floor($("#lay_ten").val() * 1 / 2 / 20);
 
         payout += $("#dont_come_four_bet").html() * 1;
-        payout += $("#dont_come_four_odds").val() * 1 / 2;
+        payout += Math.floor($("#dont_come_four_odds").val() * 1 / 2);
         payout += $("#dont_come_five_bet").html() * 1;
-        payout += $("#dont_come_five_odds").val() * 1 / 3 * 2;
+        payout += Math.floor($("#dont_come_five_odds").val() * 1 / 3 * 2);
         payout += $("#dont_come_six_bet").html() * 1;
-        payout += $("#dont_come_six_odds").val() * 1 / 6 * 5;
+        payout += Math.floor($("#dont_come_six_odds").val() * 1 / 6 * 5);
         payout += $("#dont_come_eight_bet").html() * 1;
-        payout += $("#dont_come_eight_odds").val() * 1 / 6 * 5;
+        payout += Math.floor($("#dont_come_eight_odds").val() * 1 / 6 * 5);
         payout += $("#dont_come_nine_bet").html() * 1;
-        payout += $("#dont_come_nine_odds").val() * 1 / 3 * 2;
+        payout += Math.floor($("#dont_come_nine_odds").val() * 1 / 3 * 2);
         payout += $("#dont_come_ten_bet").html() * 1;
-        payout += $("#dont_come_ten_odds").val() * 1 / 2;
+        payout += Math.floor($("#dont_come_ten_odds").val() * 1 / 2);
 
         payout -= vig;
 
@@ -638,22 +638,22 @@ function determinePayout(die1, die2) {
 
             switch (point) {
                 case 4:
-                    payout += $("#dont_odds").val() * 1 / 2;
+                    payout += Math.floor($("#dont_odds").val() * 1 / 2);
                     break;
                 case 5:
-                    payout += $("#dont_odds").val() * 1 / 3 * 2;
+                    payout += Math.floor($("#dont_odds").val() * 1 / 3 * 2);
                     break;
                 case 6:
-                    payout += $("#dont_odds").val() * 1 / 6 * 5;
+                    payout += Math.floor($("#dont_odds").val() * 1 / 6 * 5);
                     break;
                 case 8: 
-                    payout += $("#dont_odds").val() * 1 / 6 * 5;
+                    payout += Math.floor($("#dont_odds").val() * 1 / 6 * 5);
                     break;
                 case 9:
-                    payout += $("#dont_odds").val() * 1 / 3 * 2;
+                    payout += Math.floor($("#dont_odds").val() * 1 / 3 * 2);
                     break;
                 case 10:
-                    payout += $("#dont_odds").val() * 1 / 2;
+                    payout += Math.floor($("#dont_odds").val() * 1 / 2);
                     break;
             }
         } else {
